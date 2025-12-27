@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'quiz_answer_review_screen.dart';
 
 class QuizTakingScreen extends StatefulWidget {
   const QuizTakingScreen({super.key});
@@ -297,7 +298,12 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
 
   Widget _buildFinishButton(Color successColor) {
     return ElevatedButton(
-      onPressed: () => Navigator.pop(context),
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const QuizAnswerReviewScreen()),
+        );
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: successColor,
         foregroundColor: Colors.black,

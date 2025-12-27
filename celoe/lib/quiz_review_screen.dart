@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'quiz_taking_screen.dart';
+import 'quiz_answer_review_screen.dart';
 
 class QuizReviewScreen extends StatelessWidget {
   const QuizReviewScreen({super.key});
@@ -174,7 +175,12 @@ class QuizReviewScreen extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const QuizAnswerReviewScreen()),
+                                    );
+                                  },
                                   child: Text(
                                     'Lihat',
                                     style: GoogleFonts.inter(
