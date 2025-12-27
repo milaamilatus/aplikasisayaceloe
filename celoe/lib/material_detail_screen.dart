@@ -4,6 +4,7 @@ import 'home_screen.dart';
 import 'my_classes_screen.dart';
 import 'notification_screen.dart';
 import 'material_content_screen.dart';
+import 'assignment_detail_screen.dart';
 
 class MaterialDetailScreen extends StatefulWidget {
   const MaterialDetailScreen({super.key});
@@ -324,122 +325,132 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
     final cardColor = isDark ? const Color(0xFF1F2937) : Colors.white;
     final dividerColor = isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB);
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: cardColor,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-        border: Border.all(color: dividerColor),
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: 64,
-              decoration: BoxDecoration(
-                border: Border(
-                  right: BorderSide(color: dividerColor),
+    return GestureDetector(
+      onTap: () {
+        if (title.contains('Tugas 01')) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AssignmentDetailScreen()),
+          );
+        }
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+          border: Border.all(color: dividerColor),
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: 64,
+                decoration: BoxDecoration(
+                  border: Border(
+                    right: BorderSide(color: dividerColor),
+                  ),
+                ),
+                child: Center(
+                  child: isQuiz
+                      ? Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Icon(
+                              Icons.chat_bubble_outline_rounded,
+                              size: 32,
+                              color: isDark ? Colors.grey[300] : const Color(0xFF374151),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 2),
+                              child: Text(
+                                'Quiz',
+                                style: GoogleFonts.inter(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark ? Colors.grey[300] : const Color(0xFF374151),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Icon(
+                          Icons.assignment_outlined,
+                          size: 32,
+                          color: isDark ? Colors.grey[300] : const Color(0xFF374151),
+                        ),
                 ),
               ),
-              child: Center(
-                child: isQuiz
-                    ? Stack(
-                        alignment: Alignment.center,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            Icons.chat_bubble_outline_rounded,
-                            size: 32,
-                            color: isDark ? Colors.grey[300] : const Color(0xFF374151),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 2),
+                          Expanded(
                             child: Text(
-                              'Quiz',
+                              title,
                               style: GoogleFonts.inter(
-                                fontSize: 8,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                color: isDark ? Colors.grey[300] : const Color(0xFF374151),
+                                color: textMainColor,
                               ),
                             ),
                           ),
-                        ],
-                      )
-                    : Icon(
-                        Icons.assignment_outlined,
-                        size: 32,
-                        color: isDark ? Colors.grey[300] : const Color(0xFF374151),
-                      ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            title,
-                            style: GoogleFonts.inter(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: textMainColor,
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 20,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              color: isCompleted ? primaryGreen : (isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB)),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.check_rounded,
+                              color: Colors.white,
+                              size: 14,
                             ),
                           ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
+                          height: 1.5,
                         ),
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            color: isCompleted ? primaryGreen : (isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB)),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.check_rounded,
-                            color: Colors.white,
-                            size: 14,
+                      ),
+                      if (footer != null) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          footer,
+                          style: GoogleFonts.inter(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
                           ),
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      description,
-                      style: GoogleFonts.inter(
-                        fontSize: 11,
-                        color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
-                        height: 1.5,
-                      ),
-                    ),
-                    if (footer != null) ...[
-                      const SizedBox(height: 8),
-                      Text(
-                        footer,
-                        style: GoogleFonts.inter(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w500,
-                          color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
-                        ),
-                      ),
                     ],
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
