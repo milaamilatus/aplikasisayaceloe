@@ -250,45 +250,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildCourseItem(String title, String date, Color textColor, bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 24.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 80,
-            height: 48,
-            decoration: BoxDecoration(
-              color: const Color(0xFF8AB6D6),
-              borderRadius: BorderRadius.circular(16),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const CourseDetailScreen()),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 24.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 80,
+              height: 48,
+              decoration: BoxDecoration(
+                color: const Color(0xFF8AB6D6),
+                borderRadius: BorderRadius.circular(16),
+              ),
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                    height: 1.3,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                      height: 1.3,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Tanggal Mulai $date',
-                  style: GoogleFonts.poppins(
-                    fontSize: 10,
-                    color: isDark ? Colors.grey[400] : Colors.grey[500],
+                  const SizedBox(height: 4),
+                  Text(
+                    'Tanggal Mulai $date',
+                    style: GoogleFonts.poppins(
+                      fontSize: 10,
+                      color: isDark ? Colors.grey[400] : Colors.grey[500],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
