@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'material_detail_screen.dart';
+import 'home_screen.dart';
+import 'notification_screen.dart';
 
 class MyClassesScreen extends StatelessWidget {
   const MyClassesScreen({super.key});
@@ -186,26 +189,32 @@ class MyClassesScreen extends StatelessWidget {
     required double progress,
     required Color placeholderColor,
     required Color textMainColor,
-    required Color textSubColor,
     required Color primaryRed,
   }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 96,
-            height: 96,
-            decoration: BoxDecoration(
-              color: placeholderColor,
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 24),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 96,
+              height: 96,
+              decoration: BoxDecoration(
+                color: placeholderColor,
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: NetworkImage(imageUrl),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
@@ -286,9 +295,15 @@ class MyClassesScreen extends StatelessWidget {
        onTap: () {
         if (!isActive) {
           if (label == 'Notifikasi') {
-            Navigator.pushNamed(context, '/notifications');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NotificationScreen()),
+            );
           } else if (label == 'Home') {
-            Navigator.pushNamed(context, '/home');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
           }
         }
       },

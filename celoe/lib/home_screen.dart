@@ -259,46 +259,54 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         const SizedBox(height: 12),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF1F2937) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AnnouncementDetailScreen()),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF1F2937) : Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+              border: Border.all(
+                color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF374151) : const Color(0xFFF3F4F6),
               ),
-            ],
-            border: Border.all(
-              color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF374151) : const Color(0xFFF3F4F6),
             ),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  'Maintenance Pro EAS Semester Genap 2020/2021',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    'Maintenance Pro EAS Semester Genap 2020/2021',
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: 130,
-                width: double.infinity,
-                color: Colors.blue[50]?.withOpacity(0.5),
-                child: Image.network(
-                  'https://lh3.googleusercontent.com/aida-public/AB6AXuB4mGomptHGII_t_1bXJfQfKIonFXvl-5Emobiy8KlM_3kE97hApaMp5hBhCRjeiiadbDKKLgS_odlFQM4XAGlncfbHl9b9HKlb_8-t46N8lr_agihAzINruMIub6PLkWnhgLPcVAWS7HPavfVBbnmPBOcEVVcIzknsVnMBApgzJxywYuvFurlDB213iZCzXL2xfVBaEElAe7d1Lv4cG6PL7Tp4qVV6oW8rOpM_f0t09hh2XRoBAV0aIiL47PY-DuqEtevQTHXcjPA',
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.image)),
+                Container(
+                  height: 130,
+                  width: double.infinity,
+                  color: Colors.blue[50]?.withOpacity(0.5),
+                  child: Image.network(
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuB4mGomptHGII_t_1bXJfQfKIonFXvl-5Emobiy8KlM_3kE97hApaMp5hBhCRjeiiadbDKKLgS_odlFQM4XAGlncfbHl9b9HKlb_8-t46N8lr_agihAzINruMIub6PLkWnhgLPcVAWS7HPavfVBbnmPBOcEVVcIzknsVnMBApgzJxywYuvFurlDB213iZCzXL2xfVBaEElAe7d1Lv4cG6PL7Tp4qVV6oW8rOpM_f0t09hh2XRoBAV0aIiL47PY-DuqEtevQTHXcjPA',
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.image)),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'assignment_detail_screen.dart';
+import 'material_content_screen.dart';
 import 'home_screen.dart';
-import 'my_classes_screen.dart';
 import 'notification_screen.dart';
 import 'material_content_screen.dart';
 import 'assignment_detail_screen.dart';
@@ -224,9 +225,9 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
         );
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
+        margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: cardColor,
+          color: isDark ? const Color(0xFF1F2937).withOpacity(0.5) : Colors.white,
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
@@ -235,7 +236,6 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
               offset: const Offset(0, 4),
             ),
           ],
-          border: Border.all(color: dividerColor),
         ),
         child: IntrinsicHeight(
           child: Row(
@@ -244,7 +244,7 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
               Container(
                 width: 64,
                 decoration: BoxDecoration(
-                  border: Border(right: BorderSide(color: dividerColor)),
+                  border: Border(right: BorderSide(color: isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB))),
                 ),
                 child: Center(
                   child: Icon(
@@ -272,7 +272,7 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
                       const SizedBox(width: 12),
                       Icon(
                         isCompleted ? Icons.check_circle : Icons.circle_outlined,
-                        color: isCompleted ? const Color(0xFF22C55E) : dividerColor,
+                        color: isCompleted ? const Color(0xFF22C55E) : (isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB)),
                         size: 20,
                       ),
                     ],
