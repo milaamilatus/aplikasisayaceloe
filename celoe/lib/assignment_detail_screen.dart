@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'upload_file_screen.dart';
+
 class AssignmentDetailScreen extends StatelessWidget {
   const AssignmentDetailScreen({super.key});
 
@@ -46,17 +48,27 @@ class AssignmentDetailScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UploadFileScreen()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isDark ? const Color(0xFF374151) : const Color(0xFFF3F4F6),
+                      backgroundColor:
+                          isDark ? const Color(0xFF374151) : const Color(0xFFF3F4F6),
                       foregroundColor: textColor,
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
                       elevation: 2,
                     ),
                     child: Text(
                       'Tambahkan Tugas',
-                      style: GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 14),
+                      style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w500, fontSize: 14),
                     ),
                   ),
                 ),
