@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'my_classes_screen.dart';
+import 'notification_screen.dart';
 
 class AnnouncementDetailScreen extends StatelessWidget {
   const AnnouncementDetailScreen({super.key});
@@ -205,9 +207,9 @@ class AnnouncementDetailScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildNavItem(Icons.home_rounded, 'Home', true),
-                    _buildNavItem(Icons.school_rounded, 'Kelas Saya', false),
-                    _buildNavItem(Icons.notifications_rounded, 'Notifikasi', false, hasNotification: true),
+                    _buildNavItem(context, Icons.home_rounded, 'Home', true),
+                    _buildNavItem(context, Icons.school_rounded, 'Kelas Saya', false),
+                    _buildNavItem(context, Icons.notifications_rounded, 'Notifikasi', false, hasNotification: true),
                   ],
                 ),
               ),
@@ -218,43 +220,58 @@ class AnnouncementDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isActive, {bool hasNotification = false}) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Stack(
-          children: [
-            Icon(
-              icon,
-              color: isActive ? Colors.white : Colors.white.withOpacity(0.8),
-              size: 34,
-            ),
-            if (hasNotification)
-              Positioned(
-                top: 2,
-                right: 2,
-                child: Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[400],
-                    shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFFB94E48), width: 2),
+  Widget _buildNavItem(BuildContext context, IconData icon, String label, bool isActive, {bool hasNotification = false}) {
+    return GestureDetector(
+      onTap: () {
+        if (label == 'Kelas Saya' && !isActive) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+          );
+        } else if (label == 'Notifikasi') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NotificationScreen()),
+          );
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Stack(
+            children: [
+              Icon(
+                icon,
+                color: isActive ? Colors.white : Colors.white.withOpacity(0.8),
+                size: 34,
+              ),
+              if (hasNotification)
+                Positioned(
+                  top: 2,
+                  right: 2,
+                  child: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[400],
+                      shape: BoxShape.circle,
+                      border: Border.all(color: const Color(0xFFB94E48), width: 2),
+                    ),
                   ),
                 ),
-              ),
-          ],
-        ),
-        const SizedBox(height: 2),
-        Text(
-          label,
-          style: GoogleFonts.poppins(
-            color: isActive ? Colors.white : Colors.white.withOpacity(0.8),
-            fontSize: 10,
-            fontWeight: FontWeight.w500,
+            ],
           ),
-        ),
-      ],
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              color: isActive ? Colors.white : Colors.white.withOpacity(0.8),
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

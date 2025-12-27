@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'material_detail_screen.dart';
+import 'my_classes_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -523,25 +524,35 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }
 
   Widget _buildNavItem(IconData icon, String label, bool isActive) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Icon(
-          icon,
-          color: Colors.white,
-          size: 32,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: GoogleFonts.poppins(
+    return GestureDetector(
+      onTap: () {
+        if (!isActive && label == 'Kelas Saya') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+          );
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Icon(
+            icon,
             color: Colors.white,
-            fontSize: 10,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+            size: 32,
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 10,
+              fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

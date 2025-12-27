@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'my_classes_screen.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -229,24 +230,34 @@ class NotificationScreen extends StatelessWidget {
     final activeColor = isDark ? Colors.white : const Color(0xFF111827);
     final inactiveColor = Colors.grey[400];
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: isActive ? activeColor : inactiveColor,
-          size: 28,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: GoogleFonts.inter(
+    return GestureDetector(
+      onTap: () {
+        if (!isActive && label == 'Kelas Saya') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+          );
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
             color: isActive ? activeColor : inactiveColor,
-            fontSize: 10,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+            size: 28,
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: GoogleFonts.inter(
+              color: isActive ? activeColor : inactiveColor,
+              fontSize: 10,
+              fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
