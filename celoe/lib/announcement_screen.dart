@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
+import 'announcement_detail_screen.dart';
 
 class AnnouncementScreen extends StatelessWidget {
   const AnnouncementScreen({super.key});
@@ -70,13 +71,21 @@ class AnnouncementScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        _buildAnnouncementItem(
-                          title: 'Maintenance Pra UAS Semester Genap 2020/2021',
-                          author: 'Admin Celoe',
-                          date: 'Rabu, 2 Juni 2021, 10:45',
-                          textMainColor: textMainColor,
-                          textSubColor: textSubColor,
-                          isDark: isDark,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const AnnouncementDetailScreen()),
+                            );
+                          },
+                          child: _buildAnnouncementItem(
+                            title: 'Maintenance Pra UAS Semester Genap 2020/2021',
+                            author: 'Admin Celoe',
+                            date: 'Rabu, 2 Juni 2021, 10:45',
+                            textMainColor: textMainColor,
+                            textSubColor: textSubColor,
+                            isDark: isDark,
+                          ),
                         ),
                         _buildAnnouncementItem(
                           title: 'Pengumuman Maintance',
