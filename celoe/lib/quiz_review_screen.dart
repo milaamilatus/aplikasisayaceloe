@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'quiz_taking_screen.dart';
 
 class QuizReviewScreen extends StatelessWidget {
   const QuizReviewScreen({super.key});
@@ -209,9 +210,9 @@ class QuizReviewScreen extends StatelessWidget {
                 const SizedBox(height: 32),
 
                 // Actions
-                _buildActionButton('Ambil Kuis', surfaceColor, textMainColor, isDark),
+                _buildActionButton(context, 'Ambil Kuis', surfaceColor, textMainColor, isDark),
                 const SizedBox(height: 12),
-                _buildActionButton('Kembali Ke Kelas', surfaceColor, textMainColor, isDark),
+                _buildActionButton(context, 'Kembali Ke Kelas', surfaceColor, textMainColor, isDark),
                 const SizedBox(height: 40),
               ],
             ),
@@ -234,12 +235,21 @@ class QuizReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButton(String text, Color bgColor, Color textColor, bool isDark) {
+  Widget _buildActionButton(BuildContext context, String text, Color bgColor, Color textColor, bool isDark) {
     return Center(
       child: FractionallySizedBox(
         widthFactor: 0.66,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            if (text == 'Ambil Kuis') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QuizTakingScreen()),
+              );
+            } else {
+              Navigator.pop(context);
+            }
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: bgColor,
             foregroundColor: textColor,
