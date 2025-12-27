@@ -2,19 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'my_classes_screen.dart';
 import 'home_screen.dart';
+import 'announcement_screen.dart';
+import 'announcement_detail_screen.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
+
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDark ? const Color(0xFF111827) : Colors.white;
-    final surfaceColor = isDark ? const Color(0xFF1F2937) : const Color(0xFFF3F4FB);
     final textMainColor = isDark ? const Color(0xFFF9FAFB) : const Color(0xFF1F2937);
-    final textSubColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
     final borderColor = isDark ? Colors.grey[800] : Colors.grey[200];
-    const primaryColor = Color(0xFF111827);
+    final primaryRed = const Color(0xFFAA3A3A);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -23,7 +42,7 @@ class NotificationScreen extends StatelessWidget {
           children: [
             // Header
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
@@ -49,81 +68,39 @@ class NotificationScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
-            // Notification List
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  children: [
-                    _buildNotificationItem(
-                      icon: Icons.assignment_outlined,
-                      message: 'Anda telah mengirimkan pengajuan tugas untuk ',
-                      boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
-                      time: '3 Hari 9 Jam Yang Lalu',
-                      isDark: isDark,
-                      textMainColor: textMainColor,
-                      textSubColor: textSubColor,
-                      borderColor: borderColor!,
-                      isLast: false,
-                    ),
-                    _buildNotificationItem(
-                      icon: Icons.quiz_outlined,
-                      message: 'Anda telah mengirimkan pengajuan tugas untuk ',
-                      boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
-                      time: '3 Hari 9 Jam Yang Lalu',
-                      isDark: isDark,
-                      textMainColor: textMainColor,
-                      textSubColor: textSubColor,
-                      borderColor: borderColor,
-                      isLast: false,
-                    ),
-                    _buildNotificationItem(
-                      icon: Icons.assignment_outlined,
-                      message: 'Anda telah mengirimkan pengajuan tugas untuk ',
-                      boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
-                      time: '3 Hari 9 Jam Yang Lalu',
-                      isDark: isDark,
-                      textMainColor: textMainColor,
-                      textSubColor: textSubColor,
-                      borderColor: borderColor,
-                      isLast: false,
-                    ),
-                    _buildNotificationItem(
-                      icon: Icons.quiz_outlined,
-                      message: 'Anda telah mengirimkan pengajuan tugas untuk ',
-                      boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
-                      time: '3 Hari 9 Jam Yang Lalu',
-                      isDark: isDark,
-                      textMainColor: textMainColor,
-                      textSubColor: textSubColor,
-                      borderColor: borderColor,
-                      isLast: false,
-                    ),
-                    _buildNotificationItem(
-                      icon: Icons.assignment_outlined,
-                      message: 'Anda telah mengirimkan pengajuan tugas untuk ',
-                      boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
-                      time: '3 Hari 9 Jam Yang Lalu',
-                      isDark: isDark,
-                      textMainColor: textMainColor,
-                      textSubColor: textSubColor,
-                      borderColor: borderColor,
-                      isLast: false,
-                    ),
-                    _buildNotificationItem(
-                      icon: Icons.assignment_outlined,
-                      message: 'Anda telah mengirimkan pengajuan tugas untuk ',
-                      boldPart: 'Tugas Pendahuluan Modul 4',
-                      time: '5 Hari 2 Jam Yang Lalu',
-                      isDark: isDark,
-                      textMainColor: textMainColor,
-                      textSubColor: textSubColor,
-                      borderColor: borderColor,
-                      isLast: true,
-                    ),
-                  ],
+
+            // Tab Bar
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                color: isDark ? const Color(0xFF1F2937) : const Color(0xFFF3F4F6),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: TabBar(
+                controller: _tabController,
+                indicator: BoxDecoration(
+                  color: primaryRed,
+                  borderRadius: BorderRadius.circular(10),
                 ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: Colors.white,
+                unselectedLabelColor: isDark ? Colors.grey[400] : Colors.grey[600],
+                labelStyle: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 13),
+                tabs: const [
+                  Tab(text: 'Semua'),
+                  Tab(text: 'Pengumuman'),
+                ],
+              ),
+            ),
+
+            // Tab Bar View
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  _buildNotificationTab(isDark, textMainColor, borderColor!),
+                  _buildAnnouncementTab(isDark, textMainColor, borderColor),
+                ],
               ),
             ),
 
@@ -139,12 +116,149 @@ class NotificationScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildNavItem(Icons.home_outlined, 'Home', false, isDark),
-                  _buildNavItem(Icons.school_outlined, 'Kelas Saya', false, isDark),
-                  _buildNavItem(Icons.notifications_rounded, 'Notifikasi', true, isDark),
+                  _buildNavItem(Icons.home_outlined, 'Home', false, isDark, context),
+                  _buildNavItem(Icons.school_outlined, 'Kelas Saya', false, isDark, context),
+                  _buildNavItem(Icons.notifications_rounded, 'Notifikasi', true, isDark, context),
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNotificationTab(bool isDark, Color textMainColor, Color borderColor) {
+    final textSubColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: [
+          _buildNotificationItem(
+            icon: Icons.assignment_outlined,
+            message: 'Anda telah mengirimkan pengajuan tugas untuk ',
+            boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
+            time: '3 Hari 9 Jam Yang Lalu',
+            isDark: isDark,
+            textMainColor: textMainColor,
+            textSubColor: textSubColor,
+            borderColor: borderColor,
+            isLast: false,
+          ),
+          _buildNotificationItem(
+            icon: Icons.quiz_outlined,
+            message: 'Anda telah mengirimkan pengajuan tugas untuk ',
+            boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
+            time: '3 Hari 9 Jam Yang Lalu',
+            isDark: isDark,
+            textMainColor: textMainColor,
+            textSubColor: textSubColor,
+            borderColor: borderColor,
+            isLast: false,
+          ),
+          _buildNotificationItem(
+            icon: Icons.assignment_outlined,
+            message: 'Anda telah mengirimkan pengajuan tugas untuk ',
+            boldPart: 'Pengumpulan Laporan Akhir Assessment 3 (Tugas Besar)',
+            time: '3 Hari 9 Jam Yang Lalu',
+            isDark: isDark,
+            textMainColor: textMainColor,
+            textSubColor: textSubColor,
+            borderColor: borderColor,
+            isLast: true,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnnouncementTab(bool isDark, Color textMainColor, Color borderColor) {
+    final textSubColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: [
+          _buildAnnouncementItem(
+            title: 'Maintenance Pro EAS Semester Genap 2020/2021',
+            date: '15 Feb 2021',
+            isDark: isDark,
+            textMainColor: textMainColor,
+            textSubColor: textSubColor,
+            borderColor: borderColor,
+          ),
+          _buildAnnouncementItem(
+            title: 'Informasi Pelaksanaan Kuliah Daring Minggu 11-14',
+            date: '10 Feb 2021',
+            isDark: isDark,
+            textMainColor: textMainColor,
+            textSubColor: textSubColor,
+            borderColor: borderColor,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnnouncementItem({
+    required String title,
+    required String date,
+    required bool isDark,
+    required Color textMainColor,
+    required Color textSubColor,
+    required Color borderColor,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AnnouncementDetailScreen()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(top: 16),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF1F2937).withOpacity(0.5) : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: borderColor),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFFB94B4B).withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.campaign_outlined, color: Color(0xFFB94B4B), size: 24),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: textMainColor,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    date,
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: textSubColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right_rounded, color: Colors.grey),
           ],
         ),
       ),
@@ -227,7 +341,7 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isActive, bool isDark) {
+  Widget _buildNavItem(IconData icon, String label, bool isActive, bool isDark, BuildContext context) {
     final activeColor = isDark ? Colors.white : const Color(0xFF111827);
     final inactiveColor = Colors.grey[400];
 

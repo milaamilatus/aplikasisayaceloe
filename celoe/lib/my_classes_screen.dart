@@ -243,7 +243,6 @@ class MyClassesScreen extends StatelessWidget {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.05),
-                            inset: true,
                             blurRadius: 2,
                           ),
                         ],
