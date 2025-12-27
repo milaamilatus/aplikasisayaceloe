@@ -11,113 +11,131 @@ class QuizTakingScreen extends StatefulWidget {
 }
 
 class _QuizTakingScreenState extends State<QuizTakingScreen> {
-  int _currentQuestion = 3; // Following the latest HTML design
-  int _selectedOptionIndex = 2; // Option A is selected in HTML (A, B, C, D, E order is different in HTML though)
+  int _currentQuestion = 1;
+  int _selectedOptionIndex = 0; // Option A is selected in HTML
   final int _totalQuestions = 15;
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryRed = const Color(0xFFB94A48);
-    final primaryLightRed = const Color(0xFFE56B69);
-    final successColor = const Color(0xFF39E728);
-    final backgroundColor = isDark ? const Color(0xFF18181B) : Colors.white;
-    final surfaceColor = isDark ? const Color(0xFF27272A) : const Color(0xFFF5F5F5);
+    
+    // Custom Colors from HTML
+    const primaryRed = Color(0xFFB94B4B);
+    const accentGreen = Color(0xFF39E639);
+    const selectedRed = Color(0xFFEF6666);
+    final backgroundColor = isDark ? const Color(0xFF18181B) : const Color(0xFFF8F9FA);
+    final surfaceColor = isDark ? const Color(0xFF27272A) : Colors.white;
+    final optionColor = isDark ? const Color(0xFF3F3F46) : const Color(0xFFF3F4F6);
 
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              _buildHeader(primaryRed),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                  child: Column(
-                    children: [
-                      // Question Grid
-                      Center(
-                        child: Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
-                          alignment: WrapAlignment.center,
-                          children: List.generate(_totalQuestions, (index) {
-                            int number = index + 1;
-                            bool isCurrent = number == _currentQuestion;
-                            bool isCompleted = number < 15; // Simulated state
-                            return _buildQuestionIndicator(number, isCompleted, isCurrent, isDark, successColor, surfaceColor);
-                          }),
-                        ),
-                      ),
-                      const SizedBox(height: 32),
+          _buildHeader(primaryRed),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+              child: Column(
+                children: [
+                  // Question Grid
+                  Center(
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      alignment: WrapAlignment.center,
+                      children: List.generate(_totalQuestions, (index) {
+                        int number = index + 1;
+                        bool isCompleted = true; // In HTML all seem green/completed
+                        return _buildQuestionIndicator(number, isCompleted, accentGreen, isDark);
+                      }),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
 
-                      // Question Header
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            Text(
-                              'Soal Nomor $_currentQuestion ',
-                              style: GoogleFonts.poppins(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: isDark ? Colors.white : const Color(0xFF111827),
-                              ),
-                            ),
-                            Text(
-                              '/ 15',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey[500],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-
-                      // Question Text
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Dalam perancangan web yang baik, untuk teks yang menyampaikan isi konten digunakan font yang sama di setiap halaman, ini merupakan salah satu tujuan yaitu ?',
+                  // Question Header
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Text(
+                          'Soal Nomor $_currentQuestion ',
                           style: GoogleFonts.poppins(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: isDark ? const Color(0xFFF3F4F6) : const Color(0xFF1F2937),
-                            height: 1.6,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? Colors.white : const Color(0xFF111827),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 32),
-
-                      // Options
-                      _buildOption('C.', 'Hobby', 0, surfaceColor, primaryLightRed, isDark),
-                      const SizedBox(height: 16),
-                      _buildOption('B.', 'Alamat', 1, surfaceColor, primaryLightRed, isDark),
-                      const SizedBox(height: 16),
-                      _buildOption('A.', 'Jenis Kelamin', 2, surfaceColor, primaryLightRed, isDark),
-                      const SizedBox(height: 16),
-                      _buildOption('D.', 'Riwayat Pendidikan', 3, surfaceColor, primaryLightRed, isDark),
-                      const SizedBox(height: 16),
-                      _buildOption('E.', 'Umur', 4, surfaceColor, primaryLightRed, isDark),
-                      
-                      const SizedBox(height: 140), // Spacer for bottom bar
-                    ],
+                        Text(
+                          '/ $_totalQuestions',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 24),
+
+                  // Question Text
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Radio button dapat digunakan untuk menentukan ?',
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: isDark ? const Color(0xFFE5E7EB) : const Color(0xFF1F2937),
+                        height: 1.6,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Options
+                  _buildOption('A.', 'Jenis Kelamin', 0, optionColor, selectedRed, isDark),
+                  const SizedBox(height: 16),
+                  _buildOption('B.', 'Alamat', 1, optionColor, selectedRed, isDark),
+                  const SizedBox(height: 16),
+                  _buildOption('C.', 'Hobby', 2, optionColor, selectedRed, isDark),
+                  const SizedBox(height: 16),
+                  _buildOption('D.', 'Riwayat Pendidikan', 3, optionColor, selectedRed, isDark),
+                  const SizedBox(height: 16),
+                  _buildOption('E.', 'Umur', 4, optionColor, selectedRed, isDark),
+                  
+                  const SizedBox(height: 48),
+
+                  // Bottom Action Button
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const QuizAnswerReviewScreen()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isDark ? const Color(0xFF27272A) : const Color(0xFFF3F4F6),
+                      foregroundColor: isDark ? const Color(0xFFD1D5DB) : const Color(0xFF374151),
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color: isDark ? const Color(0xFF3F3F46) : const Color(0xFFE5E7EB)),
+                      ),
+                    ),
+                    child: Text(
+                      'Kembali Ke Halaman Review',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                ],
               ),
-            ],
-          ),
-          
-          // Bottom Navigation Bar
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: _buildBottomNav(isDark, successColor, surfaceColor),
+            ),
           ),
         ],
       ),
@@ -144,7 +162,7 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(width: 48), // Spacer
+          const SizedBox(width: 64), // Spacer for balance
           Text(
             'Quiz Review 1',
             style: GoogleFonts.poppins(
@@ -159,7 +177,7 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
               const Icon(Icons.alarm_rounded, color: Colors.white, size: 24),
               const SizedBox(width: 8),
               Text(
-                '15 : 00',
+                '15:00',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 18,
@@ -173,29 +191,25 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
     );
   }
 
-  Widget _buildQuestionIndicator(int number, bool isCompleted, bool isCurrent, bool isDark, Color successColor, Color surfaceColor) {
+  Widget _buildQuestionIndicator(int number, bool isCompleted, Color accentGreen, bool isDark) {
     return Container(
       width: 32,
       height: 32,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isCompleted ? successColor : surfaceColor,
-        border: isCurrent 
-            ? Border.all(color: successColor, width: 2) 
-            : (isCompleted ? null : Border.all(color: isDark ? Colors.grey[600]! : Colors.grey[400]!)),
-        boxShadow: isCompleted ? [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 2, offset: const Offset(0, 1))] : null,
+        color: accentGreen,
+        border: Border.all(color: const Color(0xFF166534), width: 1), // border-green-600
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4, offset: const Offset(0, 1))
+        ],
       ),
-      padding: isCurrent ? const EdgeInsets.all(2) : null,
-      child: Container(
-        decoration: isCurrent ? BoxDecoration(shape: BoxShape.circle, border: Border.all(color: isDark ? const Color(0xFF18181B) : Colors.white, width: 2), color: successColor) : null,
-        child: Center(
-          child: Text(
-            '$number',
-            style: GoogleFonts.poppins(
-              color: isCompleted ? Colors.black : (isDark ? Colors.grey[400] : Colors.grey[600]),
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-            ),
+      child: Center(
+        child: Text(
+          '$number',
+          style: GoogleFonts.poppins(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 12,
           ),
         ),
       ),
@@ -212,16 +226,22 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected ? selectedColor : normalColor,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
           boxShadow: isSelected ? [
             BoxShadow(
-              color: const Color(0xFFB94A48).withOpacity(0.25),
-              blurRadius: 12,
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
               offset: const Offset(0, 4),
             )
-          ] : null,
+          ] : [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 2,
+              offset: const Offset(0, 1),
+            )
+          ],
         ),
-        transform: isSelected ? (Matrix4.identity()..scale(1.01)) : Matrix4.identity(),
+        transform: isSelected ? (Matrix4.identity()..scale(0.99)) : Matrix4.identity(),
         child: Row(
           children: [
             SizedBox(
@@ -230,8 +250,8 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
                 letter,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: isSelected ? Colors.black87 : (isDark ? Colors.grey[300] : Colors.grey[700]),
+                  fontWeight: FontWeight.w600,
+                  color: isSelected ? const Color(0xFF111827) : (isDark ? Colors.grey[400] : Colors.grey[600]),
                 ),
               ),
             ),
@@ -240,81 +260,13 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
                 text,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                  color: isSelected ? Colors.black87 : (isDark ? Colors.grey[300] : Colors.grey[700]),
+                  fontWeight: FontWeight.w500,
+                  color: isSelected ? const Color(0xFF111827) : (isDark ? Colors.grey[300] : Colors.grey[700]),
                 ),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNav(bool isDark, Color successColor, Color surfaceColor) {
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          decoration: BoxDecoration(
-            color: (isDark ? const Color(0xFF18181B) : Colors.white).withOpacity(0.95),
-            border: Border(top: BorderSide(color: isDark ? Colors.grey[800]! : Colors.grey[100]!)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildNavButton(
-                label: 'Soal Sebelum nya.',
-                onPressed: () {},
-                bgColor: surfaceColor,
-                textColor: isDark ? Colors.grey[300]! : Colors.grey[600]!,
-              ),
-              _buildFinishButton(successColor),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavButton({required String label, required VoidCallback onPressed, required Color bgColor, required Color textColor}) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: bgColor,
-        foregroundColor: textColor,
-        elevation: 1,
-        shadowColor: Colors.black.withOpacity(0.05),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-      child: Text(
-        label,
-        style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
-      ),
-    );
-  }
-
-  Widget _buildFinishButton(Color successColor) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const QuizAnswerReviewScreen()),
-        );
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: successColor,
-        foregroundColor: Colors.black,
-        elevation: 4,
-        shadowColor: successColor.withOpacity(0.3),
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-      child: Text(
-        'Selesai.',
-        style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.bold),
       ),
     );
   }
