@@ -4,6 +4,7 @@ import 'notification_screen.dart';
 import 'course_detail_screen.dart';
 import 'my_classes_screen.dart';
 import 'home_screen.dart';
+import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -169,7 +170,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             bottom: 110,
             right: 24,
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false,
+                );
+              },
               icon: const Icon(Icons.logout_rounded, color: Colors.white, size: 24),
               label: Text(
                 'Log Out',

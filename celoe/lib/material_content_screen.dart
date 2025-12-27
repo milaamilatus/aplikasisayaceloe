@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'video_playback_screen.dart';
 
 class MaterialContentScreen extends StatelessWidget {
   const MaterialContentScreen({super.key});
@@ -46,7 +47,7 @@ class MaterialContentScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildHeroSection(isDark),
+                        _buildHeroSection(context, isDark),
                         _buildCourseTitleBar(contentGray),
                         _buildIntroductionSection(isDark),
                         _buildDivider(),
@@ -133,67 +134,89 @@ class MaterialContentScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroSection(bool isDark) {
-    return SizedBox(
-      height: 200,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Image.network(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuCYZ_QEPeBHjdAm13qiYsxobhhuuxy1nEOBDc76mYWWkLc9gG22R41BmNNslpTsNIC_uTvhmnTeLTaI0x8PbN0cy6UcqQnvx0SPrls5oex3k1SW4YqSTaYk6pSTQBu3gPJieIqYB98foe7YiqKUnMTne5tZle_tslQaB6NpARV0cji5sgi0IzdjFm94vCWposcIBJl84ajJf22en3cG8Zk_Lx4pskaQ1-KuTDwwr1z_wEQRd6n_MMIMyuLt1aq0SGmx5OB4ZhnLKMU',
-                    fit: BoxFit.cover,
-                    alignment: Alignment.centerLeft,
+  Widget _buildHeroSection(BuildContext context, bool isDark) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const VideoPlaybackScreen()),
+        );
+      },
+      child: SizedBox(
+        height: 200,
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.network(
+                      'https://lh3.googleusercontent.com/aida-public/AB6AXuCYZ_QEPeBHjdAm13qiYsxobhhuuxy1nEOBDc76mYWWkLc9gG22R41BmNNslpTsNIC_uTvhmnTeLTaI0x8PbN0cy6UcqQnv0SPrls5oex3k1SW4YqSTaYk6pSTQBu3gPJieIqYB98foe7YiqKUnMTne5tZle_tslQaB6NpARV0cji5sgi0IzdjFm94vCWposcIBJl84ajJf22en3cG8Zk_Lx4pskaQ1-KuTDwwr1z_wEQRd6n_MMIMyuLt1aq0SGmx5OB4ZhnLKMU',
+                      fit: BoxFit.cover,
+                      alignment: Alignment.centerLeft,
+                    ),
                   ),
-                ),
-                Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFFC13D45).withOpacity(0.1),
-                          Colors.transparent,
-                        ],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color(0xFFC13D45).withOpacity(0.1),
+                            Colors.transparent,
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 120,
-            color: isDark ? const Color(0xFFE5E7EB) : Colors.white,
-            padding: const EdgeInsets.all(16),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.transparent, Color(0x22FFFFFF)],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.play_arrow_rounded,
+                        color: Colors.white,
+                        size: 40,
                       ),
                     ),
                   ),
-                ),
-                Center(
-                  child: Image.network(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBXEaBQmgibo32-n4pfjMBeup_oQN6pPgwyYQluHmwY4YOIUXg73cIkYJPiqjHkI4x_8ovDN9B7ZnKLjk2PXxFKSToh-iTY7TZr_Xe-lwXiVrSAx2YwXD9-iXhZ6UeMr4vEKNlFupYGVpUhlGNGWa7WJYBEaAO_NFwJzjh8F4fdB1vKjYzns-JUcivW63riRHtQJFNcfZrmPN4bYvAC2HS1A7sks9hUlI-giIQeL0wfmddlMr7qeD_KEFA3Bqr7P0zx5Oen_kfRDpU',
-                    width: 64,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              width: 120,
+              color: isDark ? const Color(0xFFE5E7EB) : Colors.white,
+              padding: const EdgeInsets.all(16),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.transparent, Color(0x22FFFFFF)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Image.network(
+                      'https://lh3.googleusercontent.com/aida-public/AB6AXuBXEaBQmgibo32-n4pfjMBeup_oQN6pPgwyYQluHmwY4YOIUXg73cIkYJPiqjHkI4x_8ovDN9B7ZnKLjk2PXpFKSToh-iTY7TZr_Xe-lwXiVrSAx2YwXD9-iXhZ6UeMr4vEKNlFupYGVpUhlGNGWa7WJYBEaAO_NFwJzjh8F4fdB1vKjYzns-JUcivW63riRHtQJFNcfZrmPN4bYvAC2HS1A7sks9hUlI-giIQeL0wfmddlMr7qeD_KEFA3Bqr7P0zx5Oen_kfRDpU',
+                      width: 64,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
