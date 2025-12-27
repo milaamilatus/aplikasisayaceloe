@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
 import 'my_classes_screen.dart';
 import 'notification_screen.dart';
+import 'material_content_screen.dart';
 
 class MaterialDetailScreen extends StatefulWidget {
   const MaterialDetailScreen({super.key});
@@ -211,65 +212,74 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
   }) {
     final cardColor = isDark ? const Color(0xFF1F2937) : Colors.white;
     final dividerColor = isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB);
+    // ignore: unused_local_variable
     final primaryRed = const Color(0xFFA63434);
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: cardColor,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-        border: Border.all(color: dividerColor),
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: 64,
-              decoration: BoxDecoration(
-                border: Border(right: BorderSide(color: dividerColor)),
-              ),
-              child: Center(
-                child: Icon(
-                  icon,
-                  color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
-                  size: 28,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: GoogleFonts.inter(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: textMainColor,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Icon(
-                      isCompleted ? Icons.check_circle : Icons.circle_outlined,
-                      color: isCompleted ? const Color(0xFF22C55E) : dividerColor,
-                      size: 20,
-                    ),
-                  ],
-                ),
-              ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MaterialContentScreen()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
             ),
           ],
+          border: Border.all(color: dividerColor),
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: 64,
+                decoration: BoxDecoration(
+                  border: Border(right: BorderSide(color: dividerColor)),
+                ),
+                child: Center(
+                  child: Icon(
+                    icon,
+                    color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
+                    size: 28,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: GoogleFonts.inter(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: textMainColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Icon(
+                        isCompleted ? Icons.check_circle : Icons.circle_outlined,
+                        color: isCompleted ? const Color(0xFF22C55E) : dividerColor,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
