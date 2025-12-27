@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'profile_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -47,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Stack(
                             children: [
                               Image.network(
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuABsUp9MSkq0nuWWIJG8ytLpMuVzaA-TFrQHQbs6sOWAKihBj9G9R43O-Jna0H3PZEq99mgOds9eim_5TEDS4ngCHdCKDROgosb0fdeY7-UhVZXG84CK2eRMg5LjSlemQppvngdPIDh6cp5lV94jhDKH4G6WOmRwnPHoRTX2jb51-Zl4H_PTQKAbplZ_su3aHKNLMZITXhNbWVHHhAxzGnfJfclmOq4TXiD65bEOiKA1S7VKZ0F0N8bID32x6F1yEvDAT_s8O_Bm84',
+                                'https://lh3.googleusercontent.com/aida-public/AB6AXuABsUp9MSkq0nuWWIJG8ytLpMuVzaA-TFrQHQbs6sOWAKihBj9G9R43O-Jna0H3PZEq99mgOds9eim_5TEDS4ngCHdCKDROgosb0fdeY7-UhVZXG84CK2eRMg5LjSlemQppvngdPIDh6cp5lV94jhDKH4G6WOmRwnPHoRTX2jb51-Zl4H_PTQKAbplZ_su3aHKNLMZITXhNbWVHHhAxzGnfJfclmOq4TXiD65bEOjKA1S7VKZ0F0N8bID32x6F1yEvDAT_s8O_Bm84',
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                                 height: double.infinity,
                               ),
                               Container(
-                                color: Colors.black.withValues(alpha: 0.1),
+                                color: Colors.black.withOpacity(0.1),
                               ),
                               // Accurate SVG Path Divider (Overlaying the image)
                               Positioned(
@@ -94,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               border: Border.all(color: backgroundColor, width: 4),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.2),
+                                  color: Colors.black.withOpacity(0.2),
                                   blurRadius: 10,
                                   offset: const Offset(0, 5),
                                 ),
@@ -181,8 +182,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: double.infinity,
                             height: 54,
                             child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFFA63434),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                                 elevation: 5,
@@ -269,7 +275,7 @@ class HeaderDividerPainter extends CustomPainter {
     double sh = size.height;
 
     // Path 1: Opacity 0.25
-    paint.color = fillColor.withValues(alpha: 0.25);
+    paint.color = fillColor.withOpacity(0.25);
     Path p1 = Path();
     p1.moveTo(0, 0);
     p1.lineTo(0, sh * 0.38);
@@ -284,7 +290,7 @@ class HeaderDividerPainter extends CustomPainter {
     canvas.drawPath(p1, paint);
 
     // Path 2: Opacity 0.5
-    paint.color = fillColor.withValues(alpha: 0.5);
+    paint.color = fillColor.withOpacity(0.5);
     Path p2 = Path();
     p2.moveTo(0, 0);
     p2.lineTo(0, sh * 0.13);
