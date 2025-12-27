@@ -243,7 +243,7 @@ class NotificationScreen extends StatelessWidget {
           style: GoogleFonts.inter(
             color: isActive ? activeColor : inactiveColor,
             fontSize: 10,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.medium,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
           ),
         ),
       ],
