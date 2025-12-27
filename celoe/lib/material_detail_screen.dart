@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'assignment_detail_screen.dart';
+import 'quiz_review_screen.dart';
 import 'material_content_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
@@ -327,7 +328,12 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
 
     return GestureDetector(
       onTap: () {
-        if (title.contains('Tugas 01')) {
+        if (title.contains('Quiz Review')) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const QuizReviewScreen()),
+          );
+        } else if (title.contains('Tugas 01')) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const AssignmentDetailScreen()),
