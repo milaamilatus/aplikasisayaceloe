@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'material_detail_screen.dart';
 import 'my_classes_screen.dart';
+import 'home_screen.dart';
+import 'notification_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -530,6 +532,16 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+          );
+        } else if (label == 'Home' && !isActive) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        } else if (label == 'Notifikasi') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NotificationScreen()),
           );
         }
       },

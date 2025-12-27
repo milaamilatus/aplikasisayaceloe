@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'my_classes_screen.dart';
+import 'home_screen.dart';
 import 'notification_screen.dart';
 
 class AnnouncementDetailScreen extends StatelessWidget {
@@ -232,6 +233,11 @@ class AnnouncementDetailScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const NotificationScreen()),
+          );
+        } else if (label == 'Home' && !isActive) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         }
       },

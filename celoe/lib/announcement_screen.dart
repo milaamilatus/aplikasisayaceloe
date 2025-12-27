@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'announcement_detail_screen.dart';
 import 'my_classes_screen.dart';
 import 'notification_screen.dart';
+import 'home_screen.dart';
 
 class AnnouncementScreen extends StatelessWidget {
   const AnnouncementScreen({super.key});
@@ -209,6 +210,11 @@ class AnnouncementScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const NotificationScreen()),
+          );
+        } else if (label == 'Home' && !isActive) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         }
       },

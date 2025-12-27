@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'my_classes_screen.dart';
+import 'home_screen.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -232,10 +233,15 @@ class NotificationScreen extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        if (!isActive && label == 'Kelas Saya') {
+        if (label == 'Kelas Saya' && !isActive) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+          );
+        } else if (label == 'Home' && !isActive) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         }
       },

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'notification_screen.dart';
 import 'course_detail_screen.dart';
 import 'my_classes_screen.dart';
+import 'home_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -400,6 +401,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+          );
+        } else if (index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         } else {
           setState(() => _selectedNavIndex = index);

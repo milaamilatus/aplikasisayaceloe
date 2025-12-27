@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'home_screen.dart';
+import 'my_classes_screen.dart';
+import 'notification_screen.dart';
 
 class MaterialDetailScreen extends StatefulWidget {
   const MaterialDetailScreen({super.key});
@@ -14,67 +17,75 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDark ? const Color(0xFF111827) : const Color(0xFFFFFFFF);
-    final surfaceColor = isDark ? const Color(0xFF111827) : const Color(0xFFF3F4F6);
-    final cardColor = isDark ? const Color(0xFF1F2937) : Colors.white;
-    final textMainColor = isDark ? Colors.white : const Color(0xFF111827);
-    final textSubColor = isDark ? const Color(0xFFD1D5DB) : const Color(0xFF4B5563);
+    final backgroundColor = isDark ? const Color(0xFF111827) : Colors.white;
+    final surfaceColor = isDark ? const Color(0xFF1F2937) : const Color(0xFFF9FAFB);
+    final textMainColor = isDark ? const Color(0xFFF3F4F6) : const Color(0xFF111827);
+    final textSubColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563);
     final primaryGreen = const Color(0xFF22C55E);
 
     return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Handle & Title Section
-            Container(
-              color: backgroundColor,
-              child: Column(
-                children: [
-                  const SizedBox(height: 12),
-                  Center(
-                    child: Container(
-                      width: 48,
-                      height: 6,
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB),
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Text(
-                      'Pengantar User Interface Design',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: textMainColor,
-                        height: 1.2,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
+      backgroundColor: isDark ? Colors.black : const Color(0xFFF3F4F6),
+      body: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 448),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 4),
               ),
-            ),
+            ],
+          ),
+          child: SafeArea(
+            bottom: false,
+            child: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return [
+                  // Drag Handle & Title
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 12),
+                        Center(
+                          child: Container(
+                            width: 48,
+                            height: 6,
+                            decoration: BoxDecoration(
+                              color: isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB),
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Text(
+                            'Konsep User Interface Design',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: textMainColor,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                      ],
+                    ),
+                  ),
 
-            // Scrollable Content
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // Description Section
-                    Padding(
-                      padding: const EdgeInsets.all(24),
+                  // Description
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Deskripsi',
-                            style: GoogleFonts.poppins(
+                            style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: textMainColor,
@@ -82,44 +93,178 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Antarmuka yang dibangun harus memperhatikan prinsip-prinsip desain yang ada. Hal ini diharapkan agar antarmuka yang dibangun bukan hanya menarik secara visual tetapi dengan memperhatikan kaidah-kaidah prinsip desain diharapkan akan mendukung pengguna dalam menggunakan produk secara baik. Pelajaran mengenai prinsip UID ini sudah pernah diajarkan dalam mata kuliah Implementasi Desain Antarmuka Pengguna tetap pada matakuliah ini akan direview kembali sehingga dapat menjadi bekal saat memasukki materi mengenai User Experience',
+                            'Konsep dasar User Interface Design akan dipelajari bagaimana membangun sebuah Interaction Design pada antarmuka. Interaction ini sangat penting untuk aplikasi berkomunikasi dengan pengguna. Lalu dipelajari juga poin-poin penting pada interaction design seperti visibility, feedback, limitation, consistency dan affordance. Dan terakhir materi conceptual dan perceptual design interaction akan memberikan gambaran bagaimana bentuk dari interaction.',
                             textAlign: TextAlign.justify,
-                            style: GoogleFonts.poppins(
-                              fontSize: 11,
+                            style: GoogleFonts.inter(
+                              fontSize: 12,
                               color: textSubColor,
                               height: 1.6,
                             ),
                           ),
+                          const SizedBox(height: 24),
                         ],
                       ),
                     ),
+                  ),
 
-                    // Tab Switcher
-                    Container(
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF1F2937) : const Color(0xFFF9FAFB),
-                        border: Border(
-                          top: BorderSide(
-                            color: isDark ? const Color(0xFF374151) : const Color(0xFFF3F4F6),
-                          ),
-                          bottom: BorderSide(
-                            color: isDark ? const Color(0xFF374151) : const Color(0xFFF3F4F6),
+                  // Sticky Tabs
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _SliverAppBarDelegate(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: surfaceColor,
+                          border: Border(
+                            top: BorderSide(color: isDark ? const Color(0xFF1F2937) : const Color(0xFFF3F4F6)),
+                            bottom: BorderSide(color: isDark ? const Color(0xFF1F2937) : const Color(0xFFF3F4F6)),
                           ),
                         ),
-                      ),
-                      child: Row(
-                        children: [
-                          _buildTabItem('Lampiran Materi', 0, textMainColor, isDark),
-                          _buildTabItem('Tugas dan Kuis', 1, textMainColor, isDark),
-                        ],
+                        child: Row(
+                          children: [
+                            _buildTabItem('Lampiran Materi', 0, textMainColor, isDark),
+                            _buildTabItem('Tugas dan Kuis', 1, textMainColor, isDark),
+                          ],
+                        ),
                       ),
                     ),
+                  ),
+                ];
+              },
+              body: Container(
+                color: backgroundColor,
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                  child: Column(
+                    children: [
+                      if (_selectedTabIndex == 0) ...[
+                        _buildMaterialItem(
+                          icon: Icons.link_rounded,
+                          title: 'Zoom Meeting Syncronous',
+                          isCompleted: true,
+                          textMainColor: textMainColor,
+                          isDark: isDark,
+                        ),
+                        _buildMaterialItem(
+                          icon: Icons.folder_open_rounded,
+                          title: 'Materi 01 - Pengenalan UID',
+                          isCompleted: true,
+                          textMainColor: textMainColor,
+                          isDark: isDark,
+                        ),
+                        _buildMaterialItem(
+                          icon: Icons.folder_open_rounded,
+                          title: 'Materi 01 (Part 2) - Interaction Design',
+                          isCompleted: true,
+                          textMainColor: textMainColor,
+                          isDark: isDark,
+                        ),
+                      ] else ...[
+                        _buildTugasKuisContent(textMainColor, isDark, primaryGreen),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: _buildBottomNav(),
+    );
+  }
 
-                    // Tab Content
-                    if (_selectedTabIndex == 0)
-                      _buildMateriContent(cardColor, textMainColor, primaryGreen, isDark)
-                    else
-                      _buildTugasKuisContent(textMainColor, isDark),
+  Widget _buildTabItem(String title, int index, Color textMainColor, bool isDark) {
+    bool isSelected = _selectedTabIndex == index;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => setState(() => _selectedTabIndex = index),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: isSelected ? const Color(0xFFA63434) : Colors.transparent,
+                width: 2,
+              ),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: GoogleFonts.inter(
+                fontSize: 13,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                color: isSelected ? const Color(0xFFA63434) : (isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280)),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMaterialItem({
+    required IconData icon,
+    required String title,
+    required bool isCompleted,
+    required Color textMainColor,
+    required bool isDark,
+  }) {
+    final cardColor = isDark ? const Color(0xFF1F2937) : Colors.white;
+    final dividerColor = isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB);
+    final primaryRed = const Color(0xFFA63434);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+        border: Border.all(color: dividerColor),
+      ),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              width: 64,
+              decoration: BoxDecoration(
+                border: Border(right: BorderSide(color: dividerColor)),
+              ),
+              child: Center(
+                child: Icon(
+                  icon,
+                  color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
+                  size: 28,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: textMainColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Icon(
+                      isCompleted ? Icons.check_circle : Icons.circle_outlined,
+                      color: isCompleted ? const Color(0xFF22C55E) : dividerColor,
+                      size: 20,
+                    ),
                   ],
                 ),
               ),
@@ -130,207 +275,249 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
     );
   }
 
-  Widget _buildTabItem(String label, int index, Color textColor, bool isDark) {
-    bool isActive = _selectedTabIndex == index;
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => setState(() => _selectedTabIndex = index),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: isActive 
-                    ? (isDark ? Colors.white : Colors.black) 
-                    : Colors.transparent,
-                width: 2,
-              ),
-            ),
-          ),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 13,
-              fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
-              color: isActive ? textColor : Colors.grey[500],
-            ),
-          ),
+  Widget _buildTugasKuisContent(Color textMainColor, bool isDark, Color primaryGreen) {
+    return Column(
+      children: [
+        _buildAssignmentCard(
+          title: 'Quiz Review 01',
+          description: 'Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai pertama komponen kuis. Jangan lupa klik tombol Submit Answer setelah menjawab seluruh pertanyaan.',
+          footer: 'Kerjakan sebelum hari Jum\'at, 26 Februari 2021 jam 23:59 WIB.',
+          isCompleted: true,
+          isQuiz: true,
+          textMainColor: textMainColor,
+          isDark: isDark,
+          primaryGreen: primaryGreen,
         ),
-      ),
+        _buildAssignmentCard(
+          title: 'Tugas 01 - UID Android Mobile Game',
+          description: '1. Buatlah desain tampilan (antarmuka) pada aplikasi mobile game FPS (First Person Shooter) yang akan menjadi tugas pada mata kuliah Pemrograman Aplikasi Permainan.\n\n2. Desain yang dibuat harus melingkupi seluruh tampilan pada aplikasi/game, dari pertama kali aplikasi ......',
+          isCompleted: false,
+          isQuiz: false,
+          textMainColor: textMainColor,
+          isDark: isDark,
+          primaryGreen: primaryGreen,
+        ),
+      ],
     );
   }
 
-  Widget _buildMateriContent(Color cardColor, Color textMainColor, Color primaryGreen, bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          _buildMaterialItem(
-            icon: Icons.link_rounded,
-            title: 'Zoom Meeting Syncronous',
-            isCompleted: true,
-            rotateIcon: true,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            primaryGreen: primaryGreen,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.description_outlined,
-            title: 'Pengantar User Interface Design',
-            isCompleted: false,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            primaryGreen: primaryGreen,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.description_outlined,
-            title: 'Empat Teori Dasar Antarmuka Pengguna',
-            isCompleted: false,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            primaryGreen: primaryGreen,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.description_outlined,
-            title: 'Empat Teori Dasar Antarmuka Pengguna',
-            isCompleted: true,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            primaryGreen: primaryGreen,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.smart_display_outlined,
-            title: 'User Interface Design for Beginner',
-            isCompleted: true,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            primaryGreen: primaryGreen,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.link_rounded,
-            title: '20 Prinsip Desain',
-            isCompleted: true,
-            rotateIcon: true,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            primaryGreen: primaryGreen,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.link_rounded,
-            title: 'Best Practice UI Design',
-            isCompleted: true,
-            rotateIcon: true,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            primaryGreen: primaryGreen,
-            isDark: isDark,
-          ),
-          const SizedBox(height: 32),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTugasKuisContent(Color textMainColor, bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 256,
-            height: 256,
-            decoration: BoxDecoration(
-              color: isDark ? Colors.transparent : null,
-            ),
-            child: Image.network(
-              'https://lh3.googleusercontent.com/aida-public/AB6AXuCU7wB1Z8MvU7mDUPL-c9MiZMEGrGTdU6bm1Me-aoFuvT0vraoJ2lVl3FsN0B7N47yg1nu66sTpE42xl_qCKrPXXNDJSGWks_T-ykpQNSv2Zhtk0X59v9pdffb2GlNBYtWUxsuyxYXZQAME4Aq5N4tY2mEircpQkl2cNwdobti_HlPOH1HQc52yDlBQuD7KApAvXbHsITXIu9bHxSi5bgfOjWma_MSnnSgCwr6MKvGSEMmvokbk0AyH-pnVZq1HM3odv0Us3FtXG-U',
-              fit: BoxFit.contain,
-              color: isDark ? Colors.white.withOpacity(0.8) : null,
-              colorBlendMode: isDark ? BlendMode.modulate : null,
-            ),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            'Tidak Ada Tugas Dan Kuis Hari Ini',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: textMainColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMaterialItem({
-    required IconData icon,
+  Widget _buildAssignmentCard({
     required String title,
+    required String description,
+    String? footer,
     required bool isCompleted,
-    bool rotateIcon = false,
-    required Color cardColor,
+    required bool isQuiz,
     required Color textMainColor,
-    required Color primaryGreen,
     required bool isDark,
+    required Color primaryGreen,
   }) {
+    final cardColor = isDark ? const Color(0xFF1F2937) : Colors.white;
+    final dividerColor = isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB);
+
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: isDark ? const Color(0xFF374151) : Colors.transparent,
-          width: 1,
-        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
+        border: Border.all(color: dividerColor),
       ),
-      child: Row(
-        children: [
-          Transform.rotate(
-            angle: rotateIcon ? 0.785398 : 0, // 45 degrees in radians
-            child: Icon(
-              icon,
-              size: 20,
-              color: isDark ? Colors.grey[300] : Colors.grey[700],
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.poppins(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: isDark ? const Color(0xFFE5E7EB) : const Color(0xFF1F2937),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              width: 64,
+              decoration: BoxDecoration(
+                border: Border(
+                  right: BorderSide(color: dividerColor),
+                ),
+              ),
+              child: Center(
+                child: isQuiz
+                    ? Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Icon(
+                            Icons.chat_bubble_outline_rounded,
+                            size: 32,
+                            color: isDark ? Colors.grey[300] : const Color(0xFF374151),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 2),
+                            child: Text(
+                              'Quiz',
+                              style: GoogleFonts.inter(
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold,
+                                color: isDark ? Colors.grey[300] : const Color(0xFF374151),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Icon(
+                        Icons.assignment_outlined,
+                        size: 32,
+                        color: isDark ? Colors.grey[300] : const Color(0xFF374151),
+                      ),
               ),
             ),
-          ),
-          const SizedBox(width: 8),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: GoogleFonts.inter(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: textMainColor,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            color: isCompleted ? primaryGreen : (isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB)),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.check_rounded,
+                            color: Colors.white,
+                            size: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      description,
+                      style: GoogleFonts.inter(
+                        fontSize: 11,
+                        color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
+                        height: 1.5,
+                      ),
+                    ),
+                    if (footer != null) ...[
+                      const SizedBox(height: 8),
+                      Text(
+                        footer,
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                          color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBottomNav() {
+    return Container(
+      height: 95,
+      padding: const EdgeInsets.only(bottom: 12, left: 24, right: 24),
+      decoration: const BoxDecoration(
+        color: Color(0xFFB2544F),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(32),
+          topRight: Radius.circular(32),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildNavItem(Icons.home_rounded, 'Home', false),
+          _buildNavItem(Icons.school_rounded, 'Kelas Saya', true),
+          _buildNavItem(Icons.notifications_rounded, 'Notifikasi', false),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label, bool isActive) {
+    return GestureDetector(
+      onTap: () {
+        if (label == 'Home') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        } else if (label == 'Kelas Saya' && !isActive) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+          );
+        } else if (label == 'Notifikasi') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NotificationScreen()),
+          );
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
           Icon(
-            Icons.check_circle_rounded,
-            color: isCompleted ? primaryGreen : (isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB)),
-            size: 24,
+            icon,
+            color: Colors.white,
+            size: 32,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 10,
+              fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+            ),
           ),
         ],
       ),
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({required this.child});
+
+  final Widget child;
+
+  @override
+  double get minExtent => 50.0;
+  @override
+  double get maxExtent => 50.0;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }
