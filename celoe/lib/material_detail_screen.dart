@@ -5,8 +5,7 @@ import 'quiz_review_screen.dart';
 import 'material_content_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
-import 'material_content_screen.dart';
-import 'assignment_detail_screen.dart';
+import 'my_classes_screen.dart';
 
 class MaterialDetailScreen extends StatefulWidget {
   const MaterialDetailScreen({super.key});
@@ -162,6 +161,29 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
                           textMainColor: textMainColor,
                           isDark: isDark,
                         ),
+                        const SizedBox(height: 32),
+                        Center(
+                          child: ElevatedButton.icon(
+                            onPressed: () => setState(() => _selectedTabIndex = 1),
+                            icon: const Icon(Icons.assignment_rounded),
+                            label: Text(
+                              'LIHAT TUGAS & KUIS',
+                              style: GoogleFonts.inter(
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFA63434),
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 40),
                       ] else ...[
                         _buildTugasKuisContent(textMainColor, isDark, primaryGreen),
                       ],
@@ -495,7 +517,7 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
         } else if (label == 'Kelas Saya' && !isActive) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+            MaterialPageRoute(builder: (context) => MyClassesScreen()),
           );
         } else if (label == 'Notifikasi') {
           Navigator.push(

@@ -4,6 +4,8 @@ import 'material_detail_screen.dart';
 import 'my_classes_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
+import 'quiz_review_screen.dart';
+import 'assignment_detail_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -222,6 +224,24 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           onTap: () {
             Navigator.push(
               context,
+              MaterialPageRoute(builder: (context) => const QuizReviewScreen()),
+            );
+          },
+          child: _buildModuleItem(
+            tag: 'Kuis',
+            title: 'Quiz Review 01 - Pengenalan UID',
+            metadata: 'Tenggat: 26 Feb 2021',
+            isCompleted: true,
+            cardColor: cardColor,
+            textMainColor: textMainColor,
+            blueTagColor: const Color(0xFFFBBF24),
+            greenCheckColor: greenCheckColor,
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
               MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
             );
           },
@@ -415,10 +435,17 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
-        );
+        if (isQuiz) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const QuizReviewScreen()),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
+          );
+        }
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
@@ -442,71 +469,72 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                decoration: BoxDecoration(
-                  color: blueTagColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  tag.toUpperCase(),
-                  style: GoogleFonts.poppins(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 1,
+                  decoration: BoxDecoration(
+                    color: blueTagColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    tag.toUpperCase(),
+                    style: GoogleFonts.poppins(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: isCompleted 
-                      ? (isDark ? Colors.green.withOpacity(0.2) : Colors.green[50])
-                      : Colors.transparent,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  isCompleted ? Icons.check_circle_rounded : Icons.watch_later_rounded,
-                  color: isCompleted ? greenCheckColor : Colors.grey[400],
-                  size: 24,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              if (isQuiz)
-                _buildQuizIcon(isDark)
-              else
-                Icon(
-                  Icons.assignment_rounded,
-                  size: 48,
-                  color: isDark ? Colors.white : const Color(0xFF1F2937),
-                ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  title,
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: textMainColor,
-                    height: 1.2,
+                Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: isCompleted 
+                        ? (isDark ? Colors.green.withOpacity(0.2) : Colors.green[50])
+                        : Colors.transparent,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.check_circle_rounded,
+                    color: isCompleted ? greenCheckColor : Colors.grey[300],
+                    size: 24,
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            deadline,
-            style: GoogleFonts.poppins(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[400],
+              ],
             ),
-          ),
-        ],
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                if (isQuiz)
+                  _buildQuizIcon(isDark)
+                else
+                  Icon(
+                    Icons.assignment_rounded,
+                    size: 48,
+                    color: isDark ? Colors.white : const Color(0xFF1F2937),
+                  ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: textMainColor,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              deadline,
+              style: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[400],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -546,17 +574,17 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         if (!isActive && label == 'Kelas Saya') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MyClassesScreen()),
+            MaterialPageRoute(builder: (context) => MyClassesScreen()),
           );
         } else if (label == 'Home' && !isActive) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         } else if (label == 'Notifikasi') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const NotificationScreen()),
+            MaterialPageRoute(builder: (context) => NotificationScreen()),
           );
         }
       },

@@ -36,7 +36,7 @@ class UploadFileScreen extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   margin: const EdgeInsets.only(top: 8),
-                  padding: const EdgeInsets.only(top: 14, pb: 20),
+                  padding: const EdgeInsets.only(top: 14, bottom: 20),
                   decoration: BoxDecoration(
                     color: primaryRed,
                     borderRadius: const BorderRadius.only(

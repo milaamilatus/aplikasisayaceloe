@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'material_detail_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
+import 'course_detail_screen.dart';
 
 class MyClassesScreen extends StatelessWidget {
   const MyClassesScreen({super.key});
@@ -85,6 +86,7 @@ class MyClassesScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                     primaryRed: primaryRed,
+                    context: context,
                   ),
                   _buildCourseItem(
                     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBmwlNpF8aTCPitutcm8CvxcoWQqShbqzIc4rJwvq3eWTFg_nxPPFUVsI3KMB_0v2S2dJ1XRLE9xsPj4vs8S0bG_nMc1O9E8taYHFZqvw-O4g5YTFn9Az9QwY9it5cCWJojnaMSrZ7ff_Xn_OtdDVbF4K7DjlnxmuR1IFjAhFuckaoZN4UvbzSukrOyTeSx-DVRzW0bIl7ignpmO8MD94fPIgnZy5YIjGT5XCCoItdxEzMT_s1ZYMKr4_rW-1NPzKLfiVgYW9gaXuU',
@@ -95,6 +97,7 @@ class MyClassesScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                     primaryRed: primaryRed,
+                    context: context,
                   ),
                   _buildCourseItem(
                     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAmcFwsNXjCg96ti2CfKOZhvFOvAX7Hs4j9onQvmEpYxSdXzjlSAZhsXP1tOvLNXgI-sumTJzb84_24Qpc-IN7IM7ZeJ88BH_f0oH_9R6_-_culaZoVg1THgurPeDpx3AcbFA88zYyCWA7BTTez2l69W5kRLsmjmb4rwS3-ovfGzu4nUOrdj3OyrvCvhntRs6EzKja1owI27xmXVE6ulf_7829k6Meaze1L73HT3-JkMYt25IpG-fpegp-XfudRYQNtCCL2eRivSAs',
@@ -105,6 +108,7 @@ class MyClassesScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                     primaryRed: primaryRed,
+                    context: context,
                   ),
                   _buildCourseItem(
                     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAfARaFWDsLKRJz_ru0g6ESRR-azs2F7MT8eKcUhX8zSOO6ZjdOmZ9FKZw0S3GVnlkc19iVDPCU7L68i0P6jTd0RNoyWXzi5U28rQNPzafK9GvnLigdvF7H5LQronzvnaNrz8G4KRitxRh66rZg1N0WQmU6ilSmZ3aC95rdlczE03tuoV-1HXy7YGv3xPhQXH5pvBHTfp2HQr8ZnrzPhh5a-XcE0oV-mQFmoRVTPcWTyVRPnL03rYNb7Xm39fFhngYqAxO0TrEOvqQ',
@@ -115,6 +119,7 @@ class MyClassesScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                     primaryRed: primaryRed,
+                    context: context,
                   ),
                   _buildCourseItem(
                     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAEeCAzIsTwHWqZjL6fRmafR86h9YPd_cEXu-iYps8KnH5C2mM6a61N4jWJqAyiP8Rduyva7ybqub9y40Qf3AEdPQ4UX9HgppEso7NCVQ-uymam9-CzVBA4GOqN42v6Oe-4pcI5dL8BRTujn4LFw01OoDt4HzgJn6VvYS2-gE_HLtHYidUArBrLMraqs65-bzxV53ZGUJKnOEf9gVxD5YyS4wTc43HiRYHr13UXoZyHhn7fBS_yhN3M8ZoY1owVy6Vs1HUvw5nBrE8',
@@ -125,6 +130,7 @@ class MyClassesScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                     primaryRed: primaryRed,
+                    context: context,
                   ),
                   _buildCourseItem(
                     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6t4nnTgeso07f2e59IKgpEqKY9PMyC8Z_5jAj-8ZMCZGGNBEw2awjq0IBijGoMKdtMk4F7BN2I34r2_JDIRf_JJDgpRMK83PeaRIEt5O2dLRYwkAzuUvNeDeOSdC5II1_cL_Bg7kY9GsEJwjhmmqarKxxa7g2og-z5vN1DoeNuIT8reugdZHh1ag-cEYFs2dc6cNCM232yPNN7lyXvTzJ2XSM8FtT8D7FvedbwZ_zw31leXmvFJJuB7c4omKlzttefHzNldvWljg',
@@ -135,6 +141,7 @@ class MyClassesScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                     primaryRed: primaryRed,
+                    context: context,
                   ),
                   _buildCourseItem(
                     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDt4YArIsmk1buNZ1MxsP_0BuVG3Sbqk_LNTIVUOEz7c6CcKsABJXymMa_4LMiTV7YzBAscBYxiPVmqsMHECMjDVJ3oUZUe0DXWEBzM3CHTyZmzJOtnb1aJnb_HJSYqZgc_NwUn4tUGJ8mJxEKf5ZyVxet16zBoUZd55QN7LeHsHEqf3TgsNStcscJ1ufnjhW5K5O3A9Ui5nfixI2lYaxUrYB5TSa72GDQr5w_HeemPOmOpiZh33eH4YuZEcmSlH-vWWjfolhaUBEw',
@@ -145,6 +152,7 @@ class MyClassesScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                     primaryRed: primaryRed,
+                    context: context,
                   ),
                   const SizedBox(height: 100),
                 ],
@@ -189,13 +197,15 @@ class MyClassesScreen extends StatelessWidget {
     required double progress,
     required Color placeholderColor,
     required Color textMainColor,
+    required Color textSubColor,
     required Color primaryRed,
+    required BuildContext context,
   }) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
+          MaterialPageRoute(builder: (context) => const CourseDetailScreen()),
         );
       },
       child: Container(
@@ -215,77 +225,78 @@ class MyClassesScreen extends StatelessWidget {
                 ),
               ),
             ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  semester,
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: textSubColor,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.poppins(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: textMainColor,
-                    height: 1.3,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Stack(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 2,
-                          ),
-                        ],
-                      ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    semester,
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: textSubColor,
                     ),
-                    FractionallySizedBox(
-                      widthFactor: progress,
-                      child: Container(
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: textMainColor,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
                         height: 12,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [primaryRed, const Color(0xFFEF4444)],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
+                          color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 2,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '${(progress * 100).toInt()}% Selesai',
-                  style: GoogleFonts.poppins(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: textMainColor,
+                      FractionallySizedBox(
+                        widthFactor: progress,
+                        child: Container(
+                          height: 12,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [primaryRed, const Color(0xFFEF4444)],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 4),
+                  Text(
+                    '${(progress * 100).toInt()}% Selesai',
+                    style: GoogleFonts.poppins(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: textMainColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -297,12 +308,12 @@ class MyClassesScreen extends StatelessWidget {
           if (label == 'Notifikasi') {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const NotificationScreen()),
+              MaterialPageRoute(builder: (context) => NotificationScreen()),
             );
           } else if (label == 'Home') {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) => HomeScreen()),
             );
           }
         }
