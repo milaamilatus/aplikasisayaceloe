@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'assignment_detail_screen.dart';
-import 'quiz_review_screen.dart';
+
 import 'material_content_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
@@ -125,7 +125,6 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
                         child: Row(
                           children: [
                             _buildTabItem('Lampiran Materi', 0, textMainColor, isDark),
-                            _buildTabItem('Tugas dan Kuis', 1, textMainColor, isDark),
                           ],
                         ),
                       ),
@@ -139,54 +138,29 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                   child: Column(
                     children: [
-                      if (_selectedTabIndex == 0) ...[
-                        _buildMaterialItem(
-                          icon: Icons.link_rounded,
-                          title: 'Zoom Meeting Syncronous',
-                          isCompleted: true,
-                          textMainColor: textMainColor,
-                          isDark: isDark,
-                        ),
-                        _buildMaterialItem(
-                          icon: Icons.folder_open_rounded,
-                          title: 'Materi 01 - Pengenalan UID',
-                          isCompleted: true,
-                          textMainColor: textMainColor,
-                          isDark: isDark,
-                        ),
-                        _buildMaterialItem(
-                          icon: Icons.folder_open_rounded,
-                          title: 'Materi 01 (Part 2) - Interaction Design',
-                          isCompleted: true,
-                          textMainColor: textMainColor,
-                          isDark: isDark,
-                        ),
-                        const SizedBox(height: 32),
-                        Center(
-                          child: ElevatedButton.icon(
-                            onPressed: () => setState(() => _selectedTabIndex = 1),
-                            icon: const Icon(Icons.assignment_rounded),
-                            label: Text(
-                              'LIHAT TUGAS & KUIS',
-                              style: GoogleFonts.inter(
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFA63434),
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 40),
-                      ] else ...[
-                        _buildTugasKuisContent(textMainColor, isDark, primaryGreen),
-                      ],
+          _buildMaterialItem(
+            icon: Icons.link_rounded,
+            title: 'Zoom Meeting Syncronous',
+            isCompleted: true,
+            textMainColor: textMainColor,
+            isDark: isDark,
+          ),
+          _buildMaterialItem(
+            icon: Icons.folder_open_rounded,
+            title: 'Materi 01 - Pengenalan UID',
+            isCompleted: true,
+            textMainColor: textMainColor,
+            isDark: isDark,
+          ),
+          _buildMaterialItem(
+            icon: Icons.folder_open_rounded,
+            title: 'Materi 01 (Part 2) - Interaction Design',
+            isCompleted: true,
+            textMainColor: textMainColor,
+            isDark: isDark,
+          ),
+          const SizedBox(height: 32),
+          // Removed quiz button and related content
                     ],
                   ),
                 ),
@@ -309,180 +283,9 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
     );
   }
 
-  Widget _buildTugasKuisContent(Color textMainColor, bool isDark, Color primaryGreen) {
-    return Column(
-      children: [
-        _buildAssignmentCard(
-          title: 'Quiz Review 01',
-          description: 'Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai pertama komponen kuis. Jangan lupa klik tombol Submit Answer setelah menjawab seluruh pertanyaan.',
-          footer: 'Kerjakan sebelum hari Jum\'at, 26 Februari 2021 jam 23:59 WIB.',
-          isCompleted: true,
-          isQuiz: true,
-          textMainColor: textMainColor,
-          isDark: isDark,
-          primaryGreen: primaryGreen,
-        ),
-        _buildAssignmentCard(
-          title: 'Tugas 01 - UID Android Mobile Game',
-          description: '1. Buatlah desain tampilan (antarmuka) pada aplikasi mobile game FPS (First Person Shooter) yang akan menjadi tugas pada mata kuliah Pemrograman Aplikasi Permainan.\n\n2. Desain yang dibuat harus melingkupi seluruh tampilan pada aplikasi/game, dari pertama kali aplikasi ......',
-          isCompleted: false,
-          isQuiz: false,
-          textMainColor: textMainColor,
-          isDark: isDark,
-          primaryGreen: primaryGreen,
-        ),
-      ],
-    );
-  }
+// Quiz and assignment section removed as per user request
 
-  Widget _buildAssignmentCard({
-    required String title,
-    required String description,
-    String? footer,
-    required bool isCompleted,
-    required bool isQuiz,
-    required Color textMainColor,
-    required bool isDark,
-    required Color primaryGreen,
-  }) {
-    final cardColor = isDark ? const Color(0xFF1F2937) : Colors.white;
-    final dividerColor = isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB);
 
-    return GestureDetector(
-      onTap: () {
-        if (title.contains('Quiz Review')) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const QuizReviewScreen()),
-          );
-        } else if (title.contains('Tugas 01')) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AssignmentDetailScreen()),
-          );
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        decoration: BoxDecoration(
-          color: cardColor,
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-          border: Border.all(color: dividerColor),
-        ),
-        child: IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                width: 64,
-                decoration: BoxDecoration(
-                  border: Border(
-                    right: BorderSide(color: dividerColor),
-                  ),
-                ),
-                child: Center(
-                  child: isQuiz
-                      ? Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Icon(
-                              Icons.chat_bubble_outline_rounded,
-                              size: 32,
-                              color: isDark ? Colors.grey[300] : const Color(0xFF374151),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 2),
-                              child: Text(
-                                'Quiz',
-                                style: GoogleFonts.inter(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.bold,
-                                  color: isDark ? Colors.grey[300] : const Color(0xFF374151),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Icon(
-                          Icons.assignment_outlined,
-                          size: 32,
-                          color: isDark ? Colors.grey[300] : const Color(0xFF374151),
-                        ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              title,
-                              style: GoogleFonts.inter(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: textMainColor,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              color: isCompleted ? primaryGreen : (isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB)),
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.check_rounded,
-                              color: Colors.white,
-                              size: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        description,
-                        style: GoogleFonts.inter(
-                          fontSize: 11,
-                          color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
-                          height: 1.5,
-                        ),
-                      ),
-                      if (footer != null) ...[
-                        const SizedBox(height: 8),
-                        Text(
-                          footer,
-                          style: GoogleFonts.inter(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                            color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _buildBottomNav() {
     return Container(

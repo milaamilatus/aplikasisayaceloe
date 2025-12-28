@@ -37,8 +37,8 @@ class MaterialContentScreen extends StatelessWidget {
                     Positioned.fill(
                       child: Opacity(
                         opacity: 0.05,
-                        child: Image.network(
-                          'https://www.transparenttextures.com/patterns/cubes.png',
+                        child: Image.asset(
+                          'assets/images/pattern_cubes.png',
                           repeat: ImageRepeat.repeat,
                           color: isDark ? Colors.white : Colors.black,
                         ),
@@ -152,7 +152,7 @@ class MaterialContentScreen extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: Image.network(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuCYZ_QEPeBHjdAm13qiYsxobhhuuxy1nEOBDc76mYWWkLc9gG22R41BmNNslpTsNIC_uTvhmnTeLTaI0x8PbN0cy6UcqQnv0SPrls5oex3k1SW4YqSTaYk6pSTQBu3gPJieIqYB98foe7YiqKUnMTne5tZle_tslQaB6NpARV0cji5sgi0IzdjFm94vCWposcIBJl84ajJf22en3cG8Zk_Lx4pskaQ1-KuTDwwr1z_wEQRd6n_MMIMyuLt1aq0SGmx5OB4ZhnLKMU',
+                      'https://img.youtube.com/vi/c9Wg6Cb_YlU/maxresdefault.jpg',
                       fit: BoxFit.cover,
                       alignment: Alignment.centerLeft,
                     ),
@@ -206,8 +206,8 @@ class MaterialContentScreen extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: Image.network(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuBXEaBQmgibo32-n4pfjMBeup_oQN6pPgwyYQluHmwY4YOIUXg73cIkYJPiqjHkI4x_8ovDN9B7ZnKLjk2PXpFKSToh-iTY7TZr_Xe-lwXiVrSAx2YwXD9-iXhZ6UeMr4vEKNlFupYGVpUhlGNGWa7WJYBEaAO_NFwJzjh8F4fdB1vKjYzns-JUcivW63riRHtQJFNcfZrmPN4bYvAC2HS1A7sks9hUlI-giIQeL0wfmddlMr7qeD_KEFA3Bqr7P0zx5Oen_kfRDpU',
+                    child: Image.asset(
+                      'assets/images/ui_ux_icon.png',
                       width: 64,
                       fit: BoxFit.contain,
                     ),
@@ -311,9 +311,7 @@ class MaterialContentScreen extends StatelessWidget {
                     ),
                   ],
                   image: const DecorationImage(
-                    image: NetworkImage(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuBd8D1KCC-uaTNvSXsDnynZFYVIafyRYyhUH9pq_hP6O5qlatnHHzS-t6hbZlEJgd0Mu7x6BrrZU-xhHTrdxIl2Idyby0TqD79C8m910fftfrgQie5RnrPPmV7KhI43XfthKluPohLrhVloPSJ9vCpB1GZoVQZaxSqEPPFG6uPB_4Akctli3ifMNF47io1NJQD8iyk_MO24FWxg59UMyKyac2MyHfWlDKtr_BeI_QL-6_IGoxTP7Fj312T3vk3O65YJmN2I8YtMyys',
-                    ),
+                    image: AssetImage('assets/images/instructor.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -613,9 +611,7 @@ class MaterialContentScreen extends StatelessWidget {
                   ),
                 ],
                 image: const DecorationImage(
-                  image: NetworkImage(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuD6MOVR1SCZTCZ976-6N_yHCXi-KXida24DprZXQ3Sm6lVC055xoxes31YT9N1wbo8tVI4-1LO3XFA6W0B6THahp29mqnfLZ4atWHZbtOc0hgPnvW3UDR0crs1eqlHqjS9zW0-uCriqnTes_vQ0AOECpF0niWNGBynoOkLR8ve7XuNy4yL8ZT0rZhd5CFxZbUB5iy5d_SF5JlgY90PxvjpETErdZ1XmodxOKAGMgT8REP2MK0svLc7J4B3GfRhBAnDvLndEtNqRi-U',
-                  ),
+                  image: AssetImage('assets/images/frustrated_user.png'),
                   fit: BoxFit.cover,
                 ),
               ),
