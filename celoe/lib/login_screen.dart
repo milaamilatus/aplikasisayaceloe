@@ -50,10 +50,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Stack(
                             children: [
                               Image.network(
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuABsUp9MSkq0nuWWIJG8ytLpMuVzaA-TFrQHQbs6sOWAKihBj9G9R43O-Jna0H3PZEq99mgOds9eim_5TEDS4ngCHdCKDROgosb0fdeY7-UhVZXG84CK2eRMg5LjSlemQppvngdPIDh6cp5lV94jhDKH4G6WOmRwnPHoRTX2jb51-Zl4H_PTQKAbplZ_su3aHKNLMZITXhNbWVHHhAxzGnfJfclmOq4TXiD65bEOjKA1S7VKZ0F0N8bID32x6F1yEvDAT_s8O_Bm84',
+                                'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop',
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                                 height: double.infinity,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: Colors.grey[300],
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.image_not_supported_rounded,
+                                        color: Colors.grey,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                               Container(
                                 color: Colors.black.withOpacity(0.1),

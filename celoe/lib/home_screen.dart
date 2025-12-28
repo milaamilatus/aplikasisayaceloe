@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 2),
               Text(
-                'GANDY CANDRA PRATAMA',
+                'AMILATUS SHOLEHAH',
                 style: GoogleFonts.inter(
                   fontSize: 18,
                   color: Colors.white,

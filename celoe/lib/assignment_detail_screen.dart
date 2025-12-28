@@ -157,7 +157,7 @@ class AssignmentDetailScreen extends StatelessWidget {
           _buildStatusRow('Status Nilai', 'Belum Di nilai', isDark ? const Color(0xFF1E1E1E) : Colors.white, false, isDark),
           _buildStatusRow('Batas tanggal', 'Jumat, 26 Februari 2021, 23:59 WIB', surfaceColor, true, isDark),
           _buildStatusRow('Sisa Waktu', 'Tugas sudah di kirim 4 Hari 5 Jam Sebelum nya', isDark ? const Color(0xFF1E1E1E) : Colors.white, false, isDark, textOverrideColor: Colors.green),
-          _buildStatusRow('File Tugas', 'Dandy Candra Pratama_770887084.pdf', surfaceColor, true, isDark, isLink: true),
+          _buildStatusRow('File Tugas', 'Amilatus sholehah.pdf', surfaceColor, true, isDark, isLink: true),
         ],
       ),
     );

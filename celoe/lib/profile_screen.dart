@@ -17,6 +17,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int _selectedTabIndex = 0; // 0: About Me, 1: Kelas, 2: Edit Profile
   int _selectedNavIndex = 1; // 1: Kelas Saya (as shown in design)
 
+  // Profile status state
+  String _name = 'AMILATUS SHOLEHAH';
+  String _email = 'amilatussholehah6@gmail.com';
+  String _programStudi = 'Teknik informatika';
+  String _fakultas = 'teknik';
+
+  // Controllers for editing
+  late TextEditingController _nameController;
+  late TextEditingController _emailController;
+  late TextEditingController _prodiController;
+  late TextEditingController _fakultasController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: _name);
+    _emailController = TextEditingController(text: _email);
+    _prodiController = TextEditingController(text: _programStudi);
+    _fakultasController = TextEditingController(text: _fakultas);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _prodiController.dispose();
+    _fakultasController.dispose();
+    super.dispose();
+  }
+
   final List<Map<String, String>> _courses = [
     {
       'title': 'BAHASA INGGRIS: BUSINESS AND SCIENTIFIC D4SM-41-GAB1 [ARS]',
@@ -100,13 +130,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: const CircleAvatar(
                                 radius: 64,
                                 backgroundImage: NetworkImage(
-                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuBmx346awVB0n0u248vSYz24fCVY3rd3yvGb92L80DEYjupAK1pLcDOm75xwzNUJhrxRHH1YkuBTM0ZfjG8PHQ8o1xVcPc0bWV0x_oBz8k1vo_l8wGnAMJ14T48EC33VX1H19AA_ro1eflbEM4WUyjwex3BgvzTSJ6Fu2HTBnSlObWERL5tUA1bBE4jrCgV0mQm4Z0hw9HQA-vhKve5kaBqHm7N7GGtMlGAgx0mFFyGf5Yl0PSIvgLXG9-OTx7R-13EFtm7YldzVhg',
+                                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
                                 ),
                               ),
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'DANDY CANDRA PRATAMA',
+                              _name,
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -229,9 +259,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         _buildSectionTitle('Informasi User', textColor),
         const SizedBox(height: 16),
-        _buildInfoItem('Email address', 'dandycandra@365.telkomuniversity.ac.id', textColor, isDark),
-        _buildInfoItem('Program Studi', 'D4 Teknologi Rekayasa Multimedia', textColor, isDark),
-        _buildInfoItem('Fakultas', 'FIT', textColor, isDark),
+        _buildInfoItem('Email address', _email, textColor, isDark),
+        _buildInfoItem('Program Studi', _programStudi, textColor, isDark),
+        _buildInfoItem('Fakultas', _fakultas, textColor, isDark),
         
         const SizedBox(height: 32),
         
@@ -307,16 +337,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         _buildSectionTitle('Edit Profile', textColor),
         const SizedBox(height: 24),
-        _buildEditField('Full Name', 'Dandy Candra Pratama', textColor, isDark),
-        _buildEditField('Email', 'dandycandra@365.telkomuniversity.ac.id', textColor, isDark),
-        _buildEditField('Program Studi', 'D4 Teknologi Rekayasa Multimedia', textColor, isDark),
-        _buildEditField('Fakultas', 'FIT', textColor, isDark),
+        _buildEditField('Full Name', _nameController, textColor, isDark),
+        _buildEditField('Email', _emailController, textColor, isDark),
+        _buildEditField('Program Studi', _prodiController, textColor, isDark),
+        _buildEditField('Fakultas', _fakultasController, textColor, isDark),
         const SizedBox(height: 32),
         SizedBox(
           width: double.infinity,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                _name = _nameController.text;
+                _email = _emailController.text;
+                _programStudi = _prodiController.text;
+                _fakultas = _fakultasController.text;
+                _selectedTabIndex = 0; // Go back to About Me tab
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Profil berhasil diperbarui'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -331,7 +375,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildEditField(String label, String initialValue, Color textColor, bool isDark) {
+  Widget _buildEditField(String label, TextEditingController controller, Color textColor, bool isDark) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
@@ -347,7 +391,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 8),
           TextFormField(
-            initialValue: initialValue,
+            controller: controller,
             style: GoogleFonts.poppins(color: textColor, fontSize: 14),
             decoration: InputDecoration(
               filled: true,
