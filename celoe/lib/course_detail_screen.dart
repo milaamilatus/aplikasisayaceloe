@@ -224,24 +224,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const QuizReviewScreen()),
-            );
-          },
-          child: _buildModuleItem(
-            tag: 'Kuis',
-            title: 'Quiz Review 01 - Pengenalan UID',
-            metadata: 'Tenggat: 26 Feb 2021',
-            isCompleted: true,
-            cardColor: cardColor,
-            textMainColor: textMainColor,
-            blueTagColor: const Color(0xFFFBBF24),
-            greenCheckColor: greenCheckColor,
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
               MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
             );
           },

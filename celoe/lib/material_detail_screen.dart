@@ -138,29 +138,28 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                   child: Column(
                     children: [
-          _buildMaterialItem(
-            icon: Icons.link_rounded,
-            title: 'Zoom Meeting Syncronous',
-            isCompleted: true,
-            textMainColor: textMainColor,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.folder_open_rounded,
-            title: 'Materi 01 - Pengenalan UID',
-            isCompleted: true,
-            textMainColor: textMainColor,
-            isDark: isDark,
-          ),
-          _buildMaterialItem(
-            icon: Icons.folder_open_rounded,
-            title: 'Materi 01 (Part 2) - Interaction Design',
-            isCompleted: true,
-            textMainColor: textMainColor,
-            isDark: isDark,
-          ),
-          const SizedBox(height: 32),
-          // Removed quiz button and related content
+                      _buildMaterialItem(
+                        icon: Icons.link_rounded,
+                        title: 'Zoom Meeting Syncronous',
+                        isCompleted: true,
+                        textMainColor: textMainColor,
+                        isDark: isDark,
+                      ),
+                      _buildMaterialItem(
+                        icon: Icons.folder_open_rounded,
+                        title: 'Materi 01 - Pengenalan UID',
+                        isCompleted: true,
+                        textMainColor: textMainColor,
+                        isDark: isDark,
+                      ),
+                      _buildMaterialItem(
+                        icon: Icons.folder_open_rounded,
+                        title: 'Materi 01 (Part 2) - Interaction Design',
+                        isCompleted: true,
+                        textMainColor: textMainColor,
+                        isDark: isDark,
+                      ),
+                      const SizedBox(height: 32),
                     ],
                   ),
                 ),
@@ -283,7 +282,6 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
     );
   }
 
-// Quiz and assignment section removed as per user request
 
 
 

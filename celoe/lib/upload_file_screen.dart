@@ -1,8 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class UploadFileScreen extends StatelessWidget {
+class UploadFileScreen extends StatefulWidget {
   const UploadFileScreen({super.key});
+
+  @override
+  State<UploadFileScreen> createState() => _UploadFileScreenState();
+}
+
+class _UploadFileScreenState extends State<UploadFileScreen> {
+  String? _selectedFileName;
+  bool _isUploading = false;
+
+  void _simulateFilePicker() {
+    setState(() {
+      _selectedFileName = "Amilatus sholehah.pdf";
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('File terpilih: Amilatus sholehah.pdf')),
+    );
+  }
+
+  void _simulateSave() async {
+    if (_selectedFileName == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Silakan pilih file terlebih dahulu')),
+      );
+      return;
+    }
+
+    setState(() {
+      _isUploading = true;
+    });
+
+    // Simulate network delay
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Tugas berhasil diunggah!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +54,6 @@ class UploadFileScreen extends StatelessWidget {
     final primaryRed = const Color(0xFFB94A48);
     final backgroundColor = isDark ? const Color(0xFF121212) : Colors.white;
     final surfaceColor = isDark ? const Color(0xFF2D2D2D) : const Color(0xFFF8F9FA);
-    final textMainColor = isDark ? const Color(0xFFE0E0E0) : const Color(0xFF333333);
     final borderColor = isDark ? const Color(0xFF404040) : Colors.black;
 
     return Scaffold(
@@ -43,13 +86,6 @@ class UploadFileScreen extends StatelessWidget {
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40),
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
                   ),
                   child: Column(
                     children: [
@@ -110,21 +146,34 @@ class UploadFileScreen extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  _buildCloudIcon(),
-                                  const SizedBox(height: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: Text(
-                                      'File yang akan di upload akan tampil di sini',
-                                      textAlign: TextAlign.center,
+                                  if (_selectedFileName != null) ...[
+                                    const Icon(Icons.description_rounded, size: 80, color: Color(0xFF3CA0D9)),
+                                    const SizedBox(height: 16),
+                                    Text(
+                                      _selectedFileName!,
                                       style: GoogleFonts.poppins(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
                                         color: isDark ? Colors.white : Colors.black,
-                                        height: 1.3,
                                       ),
                                     ),
-                                  ),
+                                  ] else ...[
+                                    _buildCloudIcon(),
+                                    const SizedBox(height: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        'File yang akan di upload akan tampil di sini',
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
+                                          color: isDark ? Colors.white : Colors.black,
+                                          height: 1.3,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -139,13 +188,15 @@ class UploadFileScreen extends StatelessWidget {
                           surfaceColor,
                           isDark ? Colors.white : Colors.black,
                           isDark,
+                          onPressed: _simulateFilePicker,
                         ),
                         const SizedBox(height: 20),
                         _buildButton(
-                          'Simpan',
+                          _isUploading ? 'Menyimpan...' : 'Simpan',
                           surfaceColor,
                           isDark ? Colors.white : Colors.black,
                           isDark,
+                          onPressed: _isUploading ? null : _simulateSave,
                         ),
                         const SizedBox(height: 16),
                       ],
@@ -166,25 +217,20 @@ class UploadFileScreen extends StatelessWidget {
       height: 90,
       child: Stack(
         children: [
-          // Cloud Body
-          Positioned(
+          const Positioned(
             child: Icon(
               Icons.cloud,
               size: 110,
-              color: const Color(0xFF3CA0D9),
+              color: Color(0xFF3CA0D9),
             ),
           ),
-          // Arrow
-          Positioned(
+          const Positioned(
             top: 25,
             left: 35,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              child: const Icon(
-                Icons.arrow_upward_rounded,
-                size: 40,
-                color: Colors.white,
-              ),
+            child: Icon(
+              Icons.arrow_upward_rounded,
+              size: 40,
+              color: Colors.white,
             ),
           ),
         ],
@@ -192,11 +238,11 @@ class UploadFileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(String text, Color bgColor, Color textColor, bool isDark) {
+  Widget _buildButton(String text, Color bgColor, Color textColor, bool isDark, {VoidCallback? onPressed}) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: bgColor,
           foregroundColor: textColor,
@@ -208,7 +254,6 @@ class UploadFileScreen extends StatelessWidget {
             ),
           ),
           elevation: 2,
-          shadowColor: Colors.black12,
         ),
         child: Text(
           text,
