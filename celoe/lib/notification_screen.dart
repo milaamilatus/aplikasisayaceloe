@@ -179,8 +179,8 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
       child: Column(
         children: [
           _buildAnnouncementItem(
-            title: 'Maintenance Pro EAS Semester Genap 2020/2021',
-            date: '15 Feb 2021',
+            title: 'Maintenance Pro EAS Semester Genap 2025/2026',
+            date: '27 Des 2025',
             isDark: isDark,
             textMainColor: textMainColor,
             textSubColor: textSubColor,
@@ -188,7 +188,7 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
           ),
           _buildAnnouncementItem(
             title: 'Informasi Pelaksanaan Kuliah Daring Minggu 11-14',
-            date: '10 Feb 2021',
+            date: '27 Des 2025',
             isDark: isDark,
             textMainColor: textMainColor,
             textSubColor: textSubColor,

@@ -69,7 +69,7 @@ class AnnouncementDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Maintenance Pra UAS Semester Genap 2020/2021',
+                          'Maintenance Pra UAS Semester Genap 2025/2026',
                           style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -108,7 +108,7 @@ class AnnouncementDetailScreen extends StatelessWidget {
                                       color: isDark ? Colors.grey[300] : Colors.grey[700],
                                     ),
                                   ),
-                                  const TextSpan(text: ' - Rabu, 2 Juni 2021, 10:45'),
+                                  const TextSpan(text: ' - Sabtu, 27 Desember 2025, 10:45'),
                                 ],
                               ),
                             ),
@@ -155,7 +155,7 @@ class AnnouncementDetailScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Diinformasikan kepada seluruh pengguna LMS, kami dari tim CeLOE akan melakukan maintenance pada tanggal 12 Juni 2021, untuk meningkatkan layanan server dalam menghadapi ujian akhir semester (UAS).\n\nDengan adanya kegiatan maintenance tersebut maka situs LMS (lms.telkomuniversity.ac.id) tidak dapat diakses mulai pukul 00.00 s/d 06.00 WIB.\n\nDemikian informasi ini kami sampaikan, mohon maaf atas ketidaknyamanannya.',
+                          'Diinformasikan kepada seluruh pengguna LMS, kami dari tim CeLOE akan melakukan maintenance pada tanggal 27 Desember 2025, untuk meningkatkan layanan server dalam menghadapi ujian akhir semester (UAS).\n\nDengan adanya kegiatan maintenance tersebut maka situs LMS (lms.telkomuniversity.ac.id) tidak dapat diakses mulai pukul 00.00 s/d 06.00 WIB.\n\nDemikian informasi ini kami sampaikan, mohon maaf atas ketidaknyamanannya.',
                           textAlign: TextAlign.justify,
                           style: GoogleFonts.poppins(
                             fontSize: 14,

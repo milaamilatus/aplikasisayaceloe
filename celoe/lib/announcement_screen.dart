@@ -82,9 +82,9 @@ class AnnouncementScreen extends StatelessWidget {
                             );
                           },
                           child: _buildAnnouncementItem(
-                            title: 'Maintenance Pra UAS Semester Genap 2020/2021',
+                            title: 'Maintenance Pra UAS Semester Genap 2025/2026',
                             author: 'Admin Celoe',
-                            date: 'Rabu, 2 Juni 2021, 10:45',
+                            date: 'Sabtu, 27 Desember 2025, 10:45',
                             textMainColor: textMainColor,
                             textSubColor: textSubColor,
                             isDark: isDark,
@@ -93,15 +93,15 @@ class AnnouncementScreen extends StatelessWidget {
                         _buildAnnouncementItem(
                           title: 'Pengumuman Maintance',
                           author: 'Admin Celoe',
-                          date: 'Senin, 11 Januari 2021, 7:52',
+                          date: 'Sabtu, 27 Desember 2025, 7:52',
                           textMainColor: textMainColor,
                           textSubColor: textSubColor,
                           isDark: isDark,
                         ),
                         _buildAnnouncementItem(
-                          title: 'Maintenance Pra UAS Semester Ganjil 2020/2021',
+                          title: 'Maintenance Pra UAS Semester Ganjil 2025/2026',
                           author: 'Admin Celoe',
-                          date: 'Minggu, 10 Januari 2021, 9:30',
+                          date: 'Sabtu, 27 Desember 2025, 9:30',
                           textMainColor: textMainColor,
                           textSubColor: textSubColor,
                           isDark: isDark,

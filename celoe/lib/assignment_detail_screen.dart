@@ -3,8 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'upload_file_screen.dart';
 
-class AssignmentDetailScreen extends StatelessWidget {
+class AssignmentDetailScreen extends StatefulWidget {
   const AssignmentDetailScreen({super.key});
+
+  @override
+  State<AssignmentDetailScreen> createState() => _AssignmentDetailScreenState();
+}
+
+class _AssignmentDetailScreenState extends State<AssignmentDetailScreen> {
+  String? _submittedFileName = 'Amilatus sholehah.pdf';
+  bool _isSubmitted = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +56,19 @@ class AssignmentDetailScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
+                    onPressed: () async {
+                      final result = await Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const UploadFileScreen()),
                       );
+                      
+                      if (result != null && result is String) {
+                        setState(() {
+                          _submittedFileName = result;
+                          _isSubmitted = true;
+                        });
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
@@ -66,7 +81,7 @@ class AssignmentDetailScreen extends StatelessWidget {
                       elevation: 2,
                     ),
                     child: Text(
-                      'Tambahkan Tugas',
+                      _isSubmitted ? 'Edit Tugas' : 'Tambahkan Tugas',
                       style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w500, fontSize: 14),
                     ),
@@ -88,7 +103,7 @@ class AssignmentDetailScreen extends StatelessWidget {
       'Desain bisa dibuat menggunakan aplikasi khusus desain atau secara manual dengan tetap menjunjung kerapihan dan kejelasan setiap elemen dalam desain.',
       'Berikan identitas aplikasi game yang dibuat, seperti Nama Game, Genre, dan Platform. Serta berikan penjelasan pada setiap elemen pada desain, seperti gambar, teks, tombol, icon, dan lain-lain.',
       'File dikumpulkan dalam format .PDF dengan size maksimal 5MB.',
-      'Tugas dikumpulkan paling lambat hari Jum\'at, 26 Februari 2021 jam 23:59 WIB (akan tertutup otomatis) dan akan dipresentasikan pada pertemuan selanjutnya via Zoom Meeting.',
+      'Tugas dikumpulkan paling lambat hari Sabtu, 27 Desember 2025 jam 23:59 WIB (akan tertutup otomatis) dan akan dipresentasikan pada pertemuan selanjutnya via Zoom Meeting.',
     ];
 
     return Column(
@@ -153,11 +168,17 @@ class AssignmentDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          _buildStatusRow('Status', 'Sudah Mengirim untuk di nilai', surfaceColor, true, isDark),
+          _buildStatusRow('Status', 
+            _isSubmitted ? 'Sudah Mengirim untuk di nilai' : 'Belum Ada Percobaan', 
+            surfaceColor, true, isDark),
           _buildStatusRow('Status Nilai', 'Belum Di nilai', isDark ? const Color(0xFF1E1E1E) : Colors.white, false, isDark),
-          _buildStatusRow('Batas tanggal', 'Jumat, 26 Februari 2021, 23:59 WIB', surfaceColor, true, isDark),
-          _buildStatusRow('Sisa Waktu', 'Tugas sudah di kirim 4 Hari 5 Jam Sebelum nya', isDark ? const Color(0xFF1E1E1E) : Colors.white, false, isDark, textOverrideColor: Colors.green),
-          _buildStatusRow('File Tugas', 'Amilatus sholehah.pdf', surfaceColor, true, isDark, isLink: true),
+          _buildStatusRow('Batas tanggal', 'Sabtu, 27 Desember 2025, 23:59 WIB', surfaceColor, true, isDark),
+          if (_isSubmitted)
+            _buildStatusRow('Sisa Waktu', 'Tugas sudah di kirim 4 Hari 5 Jam Sebelum nya', isDark ? const Color(0xFF1E1E1E) : Colors.white, false, isDark, textOverrideColor: Colors.green),
+          _buildStatusRow('File Tugas', 
+            _submittedFileName ?? '-', 
+            _isSubmitted ? (isDark ? const Color(0xFF1E1E1E) : Colors.white) : surfaceColor, 
+            !_isSubmitted, isDark, isLink: _isSubmitted),
         ],
       ),
     );

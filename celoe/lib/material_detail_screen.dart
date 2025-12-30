@@ -125,6 +125,7 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
                         child: Row(
                           children: [
                             _buildTabItem('Lampiran Materi', 0, textMainColor, isDark),
+                            _buildTabItem('Tugas', 1, textMainColor, isDark),
                           ],
                         ),
                       ),
@@ -134,41 +135,152 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen> {
               },
               body: Container(
                 color: backgroundColor,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-                  child: Column(
-                    children: [
-                      _buildMaterialItem(
-                        icon: Icons.link_rounded,
-                        title: 'Zoom Meeting Syncronous',
-                        isCompleted: true,
-                        textMainColor: textMainColor,
-                        isDark: isDark,
-                      ),
-                      _buildMaterialItem(
-                        icon: Icons.folder_open_rounded,
-                        title: 'Materi 01 - Pengenalan UID',
-                        isCompleted: true,
-                        textMainColor: textMainColor,
-                        isDark: isDark,
-                      ),
-                      _buildMaterialItem(
-                        icon: Icons.folder_open_rounded,
-                        title: 'Materi 01 (Part 2) - Interaction Design',
-                        isCompleted: true,
-                        textMainColor: textMainColor,
-                        isDark: isDark,
-                      ),
-                      const SizedBox(height: 32),
-                    ],
-                  ),
-                ),
+                child: _selectedTabIndex == 0 
+                  ? _buildMaterialContent(textMainColor, isDark)
+                  : _buildTugasContent(textMainColor, isDark),
               ),
             ),
           ),
         ),
       ),
       bottomNavigationBar: _buildBottomNav(),
+    );
+  }
+
+  Widget _buildMaterialContent(Color textMainColor, bool isDark) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      child: Column(
+        children: [
+          _buildMaterialItem(
+            icon: Icons.link_rounded,
+            title: 'Zoom Meeting Syncronous',
+            isCompleted: true,
+            textMainColor: textMainColor,
+            isDark: isDark,
+          ),
+          _buildMaterialItem(
+            icon: Icons.folder_open_rounded,
+            title: 'Materi 01 - Pengenalan UID',
+            isCompleted: true,
+            textMainColor: textMainColor,
+            isDark: isDark,
+          ),
+          _buildMaterialItem(
+            icon: Icons.folder_open_rounded,
+            title: 'Materi 01 (Part 2) - Interaction Design',
+            isCompleted: true,
+            textMainColor: textMainColor,
+            isDark: isDark,
+          ),
+          const SizedBox(height: 32),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTugasContent(Color textMainColor, bool isDark) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      child: Column(
+        children: [
+          _buildAssignmentItem(
+            title: 'Tugas 01 - UID Android Mobile Game',
+            deadline: '27 Desember 2025 23:59 WIB',
+            isCompleted: false,
+            textMainColor: textMainColor,
+            isDark: isDark,
+          ),
+          const SizedBox(height: 32),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAssignmentItem({
+    required String title,
+    required String deadline,
+    required bool isCompleted,
+    required Color textMainColor,
+    required bool isDark,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AssignmentDetailScreen()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF1F2937).withOpacity(0.5) : Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: 64,
+                decoration: BoxDecoration(
+                  border: Border(right: BorderSide(color: isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB))),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.assignment_rounded,
+                    color: Color(0xFFEAB308),
+                    size: 28,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: textMainColor,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Deadline: $deadline',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Center(
+                  child: Icon(
+                    isCompleted ? Icons.check_circle : Icons.circle_outlined,
+                    color: isCompleted ? const Color(0xFF22C55E) : (isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB)),
+                    size: 20,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

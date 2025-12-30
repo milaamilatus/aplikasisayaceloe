@@ -54,7 +54,7 @@ class QuizReviewScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  "Kerjakan sebelum hari Jum'at, 26 Februari 2021 jam 23:59 WIB.",
+                  "Kerjakan sebelum hari Sabtu, 27 Desember 2025 jam 23:59 WIB.",
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -74,7 +74,7 @@ class QuizReviewScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Kuis Akan di tutup pada Jumat, 26 February 2021, 11:59 PM',
+                        'Kuis Akan di tutup pada Sabtu, 27 Desember 2025, 11:59 PM',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(fontSize: 13, color: textSubColor),
                       ),
@@ -151,7 +151,7 @@ class QuizReviewScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    'Dikirim Pada Kamis, 25 Februari 2021, 10:40',
+                                    'Dikirim Pada Sabtu, 27 Desember 2025, 10:40',
                                     style: GoogleFonts.inter(
                                       fontSize: 10,
                                       color: isDark ? Colors.grey[400] : Colors.grey[600],

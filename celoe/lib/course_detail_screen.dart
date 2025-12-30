@@ -95,7 +95,8 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                   child: Row(
                     children: [
                       _buildTabItem('Materi', 0, cardColor, textMainColor),
-                      _buildTabItem('Tugas Dan Kuis', 1, cardColor, textMainColor),
+                      _buildTabItem('Tugas', 1, cardColor, textMainColor),
+                      _buildTabItem('Quis', 2, cardColor, textMainColor),
                     ],
                   ),
                 ),
@@ -106,7 +107,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             Expanded(
               child: _selectedTabIndex == 0 
                 ? _buildMateriContent(cardColor, textMainColor, blueTagColor, greenCheckColor)
-                : _buildTugasKuisContent(cardColor, textMainColor, blueTagColor, greenCheckColor, isDark),
+                : _selectedTabIndex == 1
+                  ? _buildTugasContent(cardColor, textMainColor, blueTagColor, greenCheckColor, isDark)
+                  : _buildQuizContent(cardColor, textMainColor, blueTagColor, greenCheckColor, isDark),
             ),
           ],
         ),
@@ -188,7 +191,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
+              MaterialPageRoute(builder: (context) => MaterialDetailScreen()),
             );
           },
           child: _buildModuleItem(
@@ -206,7 +209,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
+              MaterialPageRoute(builder: (context) => MaterialDetailScreen()),
             );
           },
           child: _buildModuleItem(
@@ -224,7 +227,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
+              MaterialPageRoute(builder: (context) => MaterialDetailScreen()),
             );
           },
           child: _buildModuleItem(
@@ -273,14 +276,35 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  Widget _buildTugasKuisContent(Color cardColor, Color textMainColor, Color blueTagColor, Color greenCheckColor, bool isDark) {
+  Widget _buildTugasContent(Color cardColor, Color textMainColor, Color blueTagColor, Color greenCheckColor, bool isDark) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+      children: [
+        _buildTugasKuisItem(
+          tag: 'Tugas',
+          title: 'Tugas 01 - UID Android Mobile Game',
+          deadline: 'Tenggat Waktu : 27 Desember 2025 23:59 WIB',
+          isCompleted: false,
+          isQuiz: false,
+          cardColor: cardColor,
+          textMainColor: textMainColor,
+          blueTagColor: blueTagColor,
+          greenCheckColor: greenCheckColor,
+          isDark: isDark,
+        ),
+        const SizedBox(height: 80),
+      ],
+    );
+  }
+
+  Widget _buildQuizContent(Color cardColor, Color textMainColor, Color blueTagColor, Color greenCheckColor, bool isDark) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
       children: [
         _buildTugasKuisItem(
           tag: 'Quiz',
           title: 'Quiz Review 01',
-          deadline: 'Tenggat Waktu : 26 Februari 2021 23:59 WIB',
+          deadline: 'Tenggat Waktu : 27 Desember 2025 23:59 WIB',
           isCompleted: true,
           isQuiz: true,
           cardColor: cardColor,
@@ -290,11 +314,11 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           isDark: isDark,
         ),
         _buildTugasKuisItem(
-          tag: 'Tugas',
-          title: 'Tugas 01 - UID Android Mobile Game',
-          deadline: 'Tenggat Waktu : 26 Februari 2021 23:59 WIB',
-          isCompleted: false,
-          isQuiz: false,
+          tag: 'Pertemuan 3',
+          title: 'Kuis - Assessment 2',
+          deadline: 'Tenggat Waktu : 27 Desember 2025 23:59 WIB',
+          isCompleted: true,
+          isQuiz: true,
           cardColor: cardColor,
           textMainColor: textMainColor,
           blueTagColor: blueTagColor,
@@ -302,10 +326,22 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           isDark: isDark,
         ),
         _buildTugasKuisItem(
-          tag: 'Pertemuan 3',
-          title: 'Kuis - Assessment 2',
-          deadline: 'Tenggat Waktu : 26 Februari 2021 23:59 WIB',
-          isCompleted: true,
+          tag: 'Pertemuan 4',
+          title: 'Quiz Review 02',
+          deadline: 'Tenggat Waktu : 27 Desember 2025 23:59 WIB',
+          isCompleted: false,
+          isQuiz: true,
+          cardColor: cardColor,
+          textMainColor: textMainColor,
+          blueTagColor: blueTagColor,
+          greenCheckColor: greenCheckColor,
+          isDark: isDark,
+        ),
+        _buildTugasKuisItem(
+          tag: 'Pertemuan 5',
+          title: 'Kuis - Assessment 1',
+          deadline: 'Tenggat Waktu : 27 Desember 2025 23:59 WIB',
+          isCompleted: false,
           isQuiz: true,
           cardColor: cardColor,
           textMainColor: textMainColor,
@@ -420,12 +456,12 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         if (isQuiz) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const QuizReviewScreen()),
+            MaterialPageRoute(builder: (context) => QuizTakingScreen()),
           );
         } else {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MaterialDetailScreen()),
+            MaterialPageRoute(builder: (context) => AssignmentDetailScreen()),
           );
         }
       },

@@ -45,7 +45,7 @@ class _UploadFileScreenState extends State<UploadFileScreen> {
       ),
     );
 
-    Navigator.pop(context);
+    Navigator.pop(context, _selectedFileName);
   }
 
   @override

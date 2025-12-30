@@ -50,31 +50,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final List<Map<String, String>> _courses = [
     {
       'title': 'BAHASA INGGRIS: BUSINESS AND SCIENTIFIC D4SM-41-GAB1 [ARS]',
-      'date': 'Monday, 8 February 2021',
+      'date': 'Saturday, 27 December 2025',
     },
     {
       'title': 'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA D4SM-42-03 [ADY]',
-      'date': 'Monday, 8 February 2021',
+      'date': 'Saturday, 27 December 2025',
     },
     {
       'title': 'KEWARGANEGARAAN\nD4SM-41-GAB1 [BBO]. JUMAT 2',
-      'date': 'Monday, 8 February 2021',
+      'date': 'Saturday, 27 December 2025',
     },
     {
       'title': 'OLAH RAGA D3TT-44-02 [EYR]',
-      'date': 'Monday, 8 February 2021',
+      'date': 'Saturday, 27 December 2025',
     },
     {
       'title': 'PEMROGRAMAN MULTIMEDIA INTERAKTIF D4SM-43-04 [TPR]',
-      'date': 'Monday, 8 February 2021',
+      'date': 'Saturday, 27 December 2025',
     },
     {
       'title': 'PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA D4SM-41-GAB1 [APJ]',
-      'date': 'Monday, 8 February 2021',
+      'date': 'Saturday, 27 December 2025',
     },
     {
       'title': 'SISTEM OPERASI D4SM-44-02 [DDS]',
-      'date': 'Monday, 8 February 2021',
+      'date': 'Saturday, 27 December 2025',
     },
   ];
 
@@ -262,13 +262,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildInfoItem('Email address', _email, textColor, isDark),
         _buildInfoItem('Program Studi', _programStudi, textColor, isDark),
         _buildInfoItem('Fakultas', _fakultas, textColor, isDark),
-        
-        const SizedBox(height: 32),
-        
-        _buildSectionTitle('Aktivitas Login', textColor),
-        const SizedBox(height: 16),
-        _buildActivityItem('First access to site', 'Monday, 7 September 2020, 9:27 AM', '(288 days 12 hours)', textColor, isDark),
-        _buildActivityItem('Last access to site', 'Tuesday, 22 June 2021, 9:44 PM', '(now)', textColor, isDark),
       ],
     );
   }

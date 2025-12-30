@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Jumat, 26 Februari, 23:59 WIB',
+                        'Sabtu, 27 Desember 2025, 23:59 WIB',
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -299,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Jumat, 26 Februari, 23:59 WIB',
+                        'Sabtu, 27 Desember 2025, 23:59 WIB',
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -378,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    'Maintenance Pro EAS Semester Genap 2020/2021',
+                    'Maintenance Pro EAS Semester Genap 2025/2026',
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
