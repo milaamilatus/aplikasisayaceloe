@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,6 +26,62 @@ class QuizTakingScreen extends StatefulWidget {
 class _QuizTakingScreenState extends State<QuizTakingScreen> {
   int _currentIndex = 0;
   final Map<int, int?> _answers = {};
+  
+  // Timer related
+  Timer? _timer;
+  int _remainingSeconds = 900; // 15 minutes
+  int _elapsedSeconds = 0;
+  DateTime? _startTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTime = DateTime.now();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_remainingSeconds > 0) {
+        setState(() {
+          _remainingSeconds--;
+          _elapsedSeconds++;
+        });
+      } else {
+        _timer?.cancel();
+        _showTimeOutDialog();
+      }
+    });
+  }
+
+  void _showTimeOutDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: Text('Waktu Habis', style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+        content: Text('Waktu pengerjaan kuis telah habis. Jawaban Anda akan otomatis dikirim.', style: GoogleFonts.poppins()),
+        actions: [
+          ElevatedButton(
+            onPressed: () => _submitQuiz(),
+            child: Text('OK', style: GoogleFonts.poppins(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatTime(int seconds) {
+    int mins = seconds ~/ 60;
+    int secs = seconds % 60;
+    return '${mins.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+  }
   
   final List<QuizQuestion> _questions = [
     QuizQuestion(
@@ -312,20 +369,26 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context); // Close dialog
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QuizAnswerReviewScreen(
-                    questions: _questions,
-                    answers: _answers,
-                  ),
-                ),
-              );
+              _submitQuiz();
             },
             style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3BE62B)),
             child: Text('Ya, Submit', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ],
+      ),
+    );
+  }
+
+  void _submitQuiz() {
+    _timer?.cancel();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QuizAnswerReviewScreen(
+          questions: _questions,
+          answers: _answers,
+          timeTakenSeconds: _elapsedSeconds,
+        ),
       ),
     );
   }
@@ -365,7 +428,7 @@ class _QuizTakingScreenState extends State<QuizTakingScreen> {
               const Icon(Icons.alarm_rounded, color: Colors.white, size: 24),
               const SizedBox(width: 8),
               Text(
-                '15:00',
+                _formatTime(_remainingSeconds),
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 18,

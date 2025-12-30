@@ -6,6 +6,7 @@ import 'home_screen.dart';
 import 'notification_screen.dart';
 import 'quiz_review_screen.dart';
 import 'assignment_detail_screen.dart';
+import 'quiz_taking_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -456,7 +457,10 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         if (isQuiz) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => QuizTakingScreen()),
+            MaterialPageRoute(
+                builder: (context) => isCompleted
+                    ? const QuizReviewScreen()
+                    : QuizTakingScreen()),
           );
         } else {
           Navigator.push(

@@ -6,10 +6,13 @@ class QuizAnswerReviewScreen extends StatelessWidget {
   final List<QuizQuestion>? questions;
   final Map<int, int?>? answers;
 
+  final int? timeTakenSeconds;
+
   const QuizAnswerReviewScreen({
     super.key,
     this.questions,
     this.answers,
+    this.timeTakenSeconds,
   });
 
   @override
@@ -78,11 +81,15 @@ class QuizAnswerReviewScreen extends StatelessWidget {
                     final userAnswerText = userAnswerIndex != null 
                         ? '${String.fromCharCode(65 + userAnswerIndex)}. ${q.options[userAnswerIndex]}'
                         : 'Belum Dijawab';
-                    final correctAnswerText = '${String.fromCharCode(65 + q.correctAnswerIndex)}. ${q.options[q.correctAnswerIndex]}';
+                    final correctAnswerText = '${String.fromCharCode(65 + q.options.indexOf(q.options[q.correctAnswerIndex]))}. ${q.options[q.correctAnswerIndex]}';
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 32),
                       child: _buildReviewItem(
+                        context: context,
+                        index: index,
+                        userAnswerIndex: userAnswerIndex,
+                        isDark: isDark,
                         number: index + 1,
                         question: q.question,
                         answer: userAnswerText,
@@ -97,6 +104,10 @@ class QuizAnswerReviewScreen extends StatelessWidget {
                 else ...[
                   // Keep static fallback if no data provided
                   _buildReviewItem(
+                    context: context,
+                    index: 0,
+                    userAnswerIndex: 0,
+                    isDark: isDark,
                     number: 1,
                     question: 'Radio button dapat digunakan untuk menentukan ?',
                     answer: 'A. Jenis Kelamin',
@@ -107,6 +118,10 @@ class QuizAnswerReviewScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   _buildReviewItem(
+                    context: context,
+                    index: 1,
+                    userAnswerIndex: 1,
+                    isDark: isDark,
                     number: 2,
                     question: 'Dalam perancangan web yang baik, untuk teks yang menyampaikan isi konten digunakan font yang sama di setiap halaman, ini merupakan salah satu tujuan yaitu ?',
                     answer: 'B. Konsistensi',
@@ -115,7 +130,6 @@ class QuizAnswerReviewScreen extends StatelessWidget {
                     textMainColor: textMainColor,
                     textSubColor: textSubColor,
                   ),
-                  // ... (truncated in thoughts, but should be complete in real file)
                 ],
                 
                 const SizedBox(height: 32),
@@ -175,9 +189,9 @@ class QuizAnswerReviewScreen extends StatelessWidget {
           const SizedBox(height: 8),
           _buildSummaryRow('Status', 'Selesai', textMainColor, textSubColor),
           const SizedBox(height: 8),
-          _buildSummaryRow('Selesai Pada', 'Sabtu, 27 Desember 2025 10:40', textMainColor, textSubColor),
+          _buildSummaryRow('Selesai Pada', '${DateTime.now().day} Desember 2025 ${DateTime.now().hour}:${DateTime.now().minute}', textMainColor, textSubColor),
           const SizedBox(height: 8),
-          _buildSummaryRow('Waktu Penyelesaian', '15 Menit 22 Detik', textMainColor, textSubColor),
+          _buildSummaryRow('Waktu Penyelesaian', timeTakenSeconds != null ? _formatTime(timeTakenSeconds!) : '15 Menit 22 Detik', textMainColor, textSubColor),
           const SizedBox(height: 8),
           _buildSummaryRow('Nilai', '${score.toStringAsFixed(2)} / 100', textMainColor, textSubColor),
         ],
@@ -215,6 +229,10 @@ class QuizAnswerReviewScreen extends StatelessWidget {
   }
 
   Widget _buildReviewItem({
+    required BuildContext context,
+    required int index,
+    required int? userAnswerIndex,
+    required bool isDark,
     required int number,
     required String question,
     required String answer,
@@ -264,61 +282,68 @@ class QuizAnswerReviewScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Jawaban Tersimpan',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                  color: textSubColor,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: isCorrect ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  isCorrect ? 'BENAR' : 'SALAH',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.bold,
+                                    color: isCorrect ? Colors.green : Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            answer,
+                            style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: textMainColor,
+                            ),
+                          ),
+                          if (!isCorrect && correctAnswer != null) ...[
+                            const SizedBox(height: 4),
                             Text(
-                              'Jawaban Tersimpan',
+                              'Jawaban Benar: $correctAnswer',
                               style: GoogleFonts.poppins(
                                 fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                color: textSubColor,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: isCorrect ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Text(
-                                isCorrect ? 'BENAR' : 'SALAH',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.bold,
-                                  color: isCorrect ? Colors.green : Colors.red,
-                                ),
+                                fontWeight: FontWeight.w600,
+                                color: Colors.green,
                               ),
                             ),
                           ],
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          answer,
-                          style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: textMainColor,
-                          ),
-                        ),
-                        if (!isCorrect && correctAnswer != null) ...[
-                          const SizedBox(height: 4),
-                          Text(
-                            'Jawaban Benar: $correctAnswer',
-                            style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.green,
-                            ),
-                          ),
                         ],
-                      ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        if (questions != null) {
+                          _showSoalDialog(context, questions![index], userAnswerIndex, isDark);
+                        }
+                      },
                       child: Text(
                         'Lihat Soal',
                         style: GoogleFonts.poppins(
@@ -335,6 +360,65 @@ class QuizAnswerReviewScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  String _formatTime(int seconds) {
+    int mins = seconds ~/ 60;
+    int secs = seconds % 60;
+    return '${mins} Menit ${secs} Detik';
+  }
+
+  void _showSoalDialog(BuildContext context, QuizQuestion q, int? userAnswerIndex, bool isDark) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: isDark ? const Color(0xFF1F2937) : Colors.white,
+        title: Text('Detail Soal', style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: isDark ? Colors.white : Colors.black)),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(q.question, style: GoogleFonts.poppins(fontWeight: FontWeight.w600, color: isDark ? Colors.white : Colors.black)),
+              const SizedBox(height: 16),
+              ...List.generate(q.options.length, (i) {
+                bool isCorrect = i == q.correctAnswerIndex;
+                bool isUserChoice = i == userAnswerIndex;
+                Color textColor = isDark ? Colors.white70 : Colors.black87;
+                if (isCorrect) textColor = Colors.green;
+                if (isUserChoice && !isCorrect) textColor = Colors.red;
+
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Row(
+                    children: [
+                      Icon(
+                        isCorrect ? Icons.check_circle : (isUserChoice ? Icons.cancel : Icons.circle_outlined),
+                        size: 16,
+                        color: isCorrect ? Colors.green : (isUserChoice ? Colors.red : Colors.grey),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          '${String.fromCharCode(65 + i)}. ${q.options[i]}',
+                          style: GoogleFonts.poppins(color: textColor, fontWeight: (isCorrect || isUserChoice) ? FontWeight.bold : FontWeight.normal),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Tutup', style: GoogleFonts.poppins(color: const Color(0xFFC04D4B))),
+          ),
+        ],
+      ),
     );
   }
 }
